@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
+import CustomDrink from './CustomDrink/index.jsx';
 
 class App extends Component {
+
   render() {
     return (
-      <h1>CoffeeStatus</h1>
+      <div>
+        <h1>CoffeeStatus</h1>
+        <CustomDrink />
+      </div>
     )
   }
 }

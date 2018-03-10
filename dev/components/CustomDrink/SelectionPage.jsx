@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {selectDrink} from '../../actions/selectDrink.js';
+import {connect} from 'react-redux';
 
-const SelectionPage = (props) => (
+const SelectionPage = ({selectDrink}) => (
   <div>
     <h1>What Drink Would You Like?</h1>
-    <button>Coffee</button>
-    <button>Tea</button>
+    <button onClick={() => selectDrink("Coffee")}>Coffee</button>
+    <button onClick={() => selectDrink("Tea")}>Tea</button>
   </div>
 )
 
+export default connect(null, {selectDrink})(SelectionPage);

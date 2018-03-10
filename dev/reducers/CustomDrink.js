@@ -1,3 +1,5 @@
+import {SELECT_DRINK} from '../actions/selectDrink.js';
+
 const defaultDrinkState = {
   drink: '',
   type: '',
@@ -9,6 +11,12 @@ const defaultDrinkState = {
 
 
 const CustomDrink = (state = defaultDrinkState, action) => {
+  console.log("state ", state)
+  console.log("action ", action)
+  switch(action.type){
+    case SELECT_DRINK:
+      return {...state, drink: action.payload};
+  }
   return state;
 }
 
