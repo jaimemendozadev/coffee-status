@@ -28,11 +28,20 @@ class SelectionType extends Component {
           "Macchiato": false,
           "Mocha": false,
           "Frappuchino": false
-        }
+        },
+        "madeSelection": false,
+        "errorMessage": ''
       }
+      this.renderErrorMessage = this.renderErrorMessage.bind(this);
       this.renderInputFields = this.renderInputFields.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
       
+  }
+
+  renderErrorMessage(){
+    if (this.state.errorMessage){
+      return <div>{this.state.errorMessage}</div>
+    }
   }
 
   renderInputFields(TypeArray, temperature){
@@ -42,8 +51,9 @@ class SelectionType extends Component {
           <input
             type="checkbox"
             name={type}
-            checked={this.state[temperature][TypeArray]}
+            checked={this.state[temperature][type]}
             onClick={(event) => this.handleInputChange(event, temperature)} />
+            {console.log(`${temperature}: ${type} ${this.state[temperature][type]}`)}
         </label> 
       )
     });  
@@ -51,7 +61,9 @@ class SelectionType extends Component {
     
   
 
-  handleInputChange(event, temperature) {
+  handleInputChange(event, temp) {
+    const {madeSelection} = this.state;
+    let newState;
 
     //value is boolean that checks if input is clicked
     const value = event.target.checked;
@@ -59,13 +71,45 @@ class SelectionType extends Component {
     //get name attr from <input>
     const name = event.target.name;
 
-    //make copy of old state
-    const newState = {...this.state};
 
-    //update state
-    newState[temperature][name] = value
+    //when nothing's been selected
+    if (madeSelection == false){
+      //make copy of old state
+      newState = {...this.state}
 
-    this.setState(newState);
+      //update state
+      newState[temp][name] = value;
+      newState.madeSelection = true;
+      newState.errorMessage = null;
+      this.setState(newState);
+    }
+
+
+    if (madeSelection) {
+
+      //if you try to make more than one selection
+      if (this.state[temp][name] == false) {
+
+        //make copy of old state
+        newState = {...this.state};
+
+        //update state
+        newState.errorMessage = "Unclick the last selection to make a new selection.";
+        newState[temp][name] = false;
+      
+        this.setState(newState);
+
+      } else {
+        //make copy of old state
+        newState = {...this.state}
+
+        //update state
+        newState[temp][name] = value;
+        newState.madeSelection = false;
+        newState.errorMessage = null;
+        this.setState(newState);
+      }
+    }
   }
   
   render() {
@@ -86,6 +130,9 @@ class SelectionType extends Component {
           <legend>Hot</legend>
             {this.renderInputFields(HotCoffee, "Hot")}
         </fieldset>
+
+        {this.renderErrorMessage()}
+
       </form>
     )
   }
