@@ -1,14 +1,11 @@
 html {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 .SelectionPage {
   display: flex;
   flex-wrap: wrap;
   border: 1px solid red;
   height: 30vh;
-  width: 30vw;
-}
-
+  width: 30vw; }
