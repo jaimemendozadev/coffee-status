@@ -1,57 +1,52 @@
 import React, {Component} from 'react'
 import SelectionPage from './SelectionPage.jsx';
+import SelectType from './SelectType.jsx';
+
 import {connect} from 'react-redux';
 
 class CustomDrink extends Component {
   constructor (props) {
     super(props)
-
-    this.state = {
-      selectionPage: true, // coffee or tea
-      toggleSize: false, // size, caffeine, ice/temp
-      toggleMilk: false, // milk
-      toggleSweet: false, // sweet
-      toggleToppings: false, // toppings
-      confirmationPage: false
-    }
     this.renderPage = this.renderPage.bind(this);
-
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log("nextProps", nextProps)
-  }
+  renderPage(currentPage){
 
-  renderPage(){
-    const {selectionPage, toggleSize, toggleMilk, toggleSweet, toggleToppings, confirmationPage} = this.state;
-
-    if(selectionPage){
+    if(currentPage == 'selectionPage'){
       return <SelectionPage />
     }
 
-    if(toggleSize){
-      
+    if(currentPage == 'selectType'){
+      return <SelectType />
+    }
+    
+    
+    /*
+
+    if(currentPage == 'toggleSize'){
+          
     }
 
-    if(toggleMilk){
+    if(currentPage == 'toggleMilk'){
 
     }
 
-    if(toggleSweet){
+    if(currentPage == 'toggleSweet'){
 
     }
 
-    if(toggleToppings){
+    if(currentPage == 'toggleToppings'){
 
     }
 
-    if(confirmationPage){
+    if(currentPage == 'confirmationPage'){
 
     }
+    */
   }
 
   render () {
-    const { drink, type, selected_size, selected_milk, other_options } = this.props;
+    const { current_page, drink, type, selected_size, selected_milk, other_options } = this.props;
     return (
       <div>
         <h1>Create a Custom Drink</h1>
@@ -66,20 +61,16 @@ class CustomDrink extends Component {
           </ul>
         </div>
         
-        {this.renderPage()}
+        {this.renderPage(current_page)}
       </div>
 
     )
   }
 }
 
-
-
-
-
-
-function mapStateToProps({ CustomDrink: {drink, type, selected_size,selected_milk, other_options } }){
+function mapStateToProps({ CustomDrink: {current_page, drink, type, selected_size,selected_milk, other_options } }){
   return {
+    current_page,
     drink,
     type,
     selected_size,
