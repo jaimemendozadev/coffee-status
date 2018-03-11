@@ -1,21 +1,52 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-
 class SelectionType extends Component {
   constructor(props){
     super(props);
       this.state = {
         "Iced": {
-          "Latte": false  
+          "Coffee": false,
+          "Latte": false,
+          "Americano": false,
+          "Espresso": false,
+          "Cappuccino": false,
+          "Flat White": false,
+          "Macchiato": false,
+          "Mocha": false,
+          "Cold Brew": false,
+          "Nitro": false
         },
 
         "Hot": {
-    
+          "Coffee": false,
+          "Latte": false,
+          "Americano": false,
+          "Espresso": false,
+          "Cappuccino": false,
+          "Flat White": false,
+          "Macchiato": false,
+          "Mocha": false,
+          "Frappuchino": false
         }
       }
+      this.renderInputFields = this.renderInputFields.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
       
+  }
+
+  renderInputFields(TypeArray, temperature){
+    return TypeArray.map((type, idx) => {
+      return (
+        <label key={`${type + idx}`}>{type}
+          <input
+            type="checkbox"
+            name={type}
+            checked={this.state[temperature][TypeArray]}
+            onClick={(event) => this.handleInputChange(event, temperature)} />
+        </label> 
+      )
+    });  
   }
     
   
@@ -38,27 +69,24 @@ class SelectionType extends Component {
   }
   
   render() {
-    console.log("selectType State ", this.state)
+    const IcedCoffee = ["Coffee", "Latte", "Americano", "Espresso", "Cappuccino", "Flat White", "Macchiato", "Mocha", "Cold Brew", "Nitro"];
+    
+    const HotCoffee = ["Coffee", "Latte", "Americano", "Espresso", "Cappuccino", "Flat White", "Macchiato", "Mocha", "Frappuchino"];
+
     return (
-      <div>
+      <form>
+        {console.log("this.state ", this.state)}
         <h1>What cup o' Joe would you like?</h1>
-        <form>
-          <h1>Iced</h1>
-
-          <label>Latte
-          <input
-            temperature="Iced"
-            type="checkbox"
-            name="Latte"
-            checked={this.state.icedLatte}
-            onClick={(event) => this.handleInputChange(event, "Iced")} />
-            </label> 
-            
-            
-            
-
-        </form>
-      </div>
+        <fieldset>
+          <legend>Iced</legend>
+            {this.renderInputFields(IcedCoffee, "Iced")}
+        </fieldset>  
+        
+        <fieldset>
+          <legend>Hot</legend>
+            {this.renderInputFields(HotCoffee, "Hot")}
+        </fieldset>
+      </form>
     )
   }
 }
