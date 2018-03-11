@@ -18,6 +18,10 @@ class CustomDrink extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log("nextProps", nextProps)
+  }
+
   renderPage(){
     const {selectionPage, toggleSize, toggleMilk, toggleSweet, toggleToppings, confirmationPage} = this.state;
 
@@ -74,7 +78,7 @@ class CustomDrink extends Component {
 
 
 
-function mapStateToProps({ drink, type, selected_size,selected_milk, other_options }){
+function mapStateToProps({ CustomDrink: {drink, type, selected_size,selected_milk, other_options } }){
   return {
     drink,
     type,
