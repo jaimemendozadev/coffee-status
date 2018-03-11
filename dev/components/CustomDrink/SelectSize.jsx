@@ -11,4 +11,11 @@ class SelectSize extends Component {
       "X-Large": false
     }
   }
+  render(){
+    return (
+      <h1>SelectSize</h1>
+    )
+  }
 }
+
+export default SelectSize;

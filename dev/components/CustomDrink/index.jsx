@@ -1,48 +1,12 @@
 import React, {Component} from 'react'
-import SelectionPage from './SelectionPage.jsx';
-import SelectType from './SelectType.jsx';
+import {renderPage} from '../utils.jsx';
 
 import {connect} from 'react-redux';
 
 class CustomDrink extends Component {
   constructor (props) {
     super(props)
-    this.renderPage = this.renderPage.bind(this);
-  }
-
-  renderPage(currentPage){
-
-    if(currentPage == 'selectionPage'){
-      return <SelectionPage />
-    }
-
-    if(currentPage == 'selectType'){
-      return <SelectType />
-    }
-    
-    
-    /*
-
-    if(currentPage == 'toggleSize'){
-          
-    }
-
-    if(currentPage == 'toggleMilk'){
-
-    }
-
-    if(currentPage == 'toggleSweet'){
-
-    }
-
-    if(currentPage == 'toggleToppings'){
-
-    }
-
-    if(currentPage == 'confirmationPage'){
-
-    }
-    */
+    this.renderPage = renderPage;
   }
 
   render () {
@@ -54,7 +18,7 @@ class CustomDrink extends Component {
           <h1>You've currently selected:</h1>
           <ul>
             <li>Drink: {drink}</li>
-            <li>Type: {type}</li>
+            <li>Type: {!type ? '' : type.join(" ")}</li>
             <li>Size: {selected_size}</li>
             <li>Milk Type: {selected_milk}</li>
             <li>Options: {!other_options ? '' : other_options.join(" ")}</li>

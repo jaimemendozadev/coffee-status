@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {selectType} from '../../actions/selectType.js';
+import {renderSelectSize} from '../../actions/renderSelectSize.js';
 
-class SelectionType extends Component {
+class SelectType extends Component {
   constructor(props){
     super(props);
       this.state = {
@@ -33,6 +35,7 @@ class SelectionType extends Component {
         "errorMessage": ''
       }
       this.renderErrorMessage = this.renderErrorMessage.bind(this);
+      this.renderSelectSizeButton = this.renderSelectSizeButton.bind(this);
       this.renderInputFields = this.renderInputFields.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
       
@@ -41,6 +44,14 @@ class SelectionType extends Component {
   renderErrorMessage(){
     if (this.state.errorMessage){
       return <div>{this.state.errorMessage}</div>
+    }
+  }
+
+  renderSelectSizeButton(){
+    const {renderSelectSize} = this.props;
+    
+    if (this.state.madeSelection){
+     return <button onClick={() => renderSelectSize()}>Select a Size</button>;
     }
   }
 
@@ -53,7 +64,6 @@ class SelectionType extends Component {
             name={type}
             checked={this.state[temperature][type]}
             onClick={(event) => this.handleInputChange(event, temperature)} />
-            {console.log(`${temperature}: ${type} ${this.state[temperature][type]}`)}
         </label> 
       )
     });  
@@ -63,6 +73,7 @@ class SelectionType extends Component {
 
   handleInputChange(event, temp) {
     const {madeSelection} = this.state;
+    const {selectType} = this.props;
     let newState;
 
     //value is boolean that checks if input is clicked
@@ -81,7 +92,7 @@ class SelectionType extends Component {
       newState[temp][name] = value;
       newState.madeSelection = true;
       newState.errorMessage = null;
-      this.setState(newState);
+      this.setState(newState, ()=> selectType(temp, name));
     }
 
 
@@ -107,7 +118,7 @@ class SelectionType extends Component {
         newState[temp][name] = value;
         newState.madeSelection = false;
         newState.errorMessage = null;
-        this.setState(newState);
+        this.setState(newState, ()=> selectType('', ''));
       }
     }
   }
@@ -119,7 +130,6 @@ class SelectionType extends Component {
 
     return (
       <form>
-        {console.log("this.state ", this.state)}
         <h1>What cup o' Joe would you like?</h1>
         <fieldset>
           <legend>Iced</legend>
@@ -132,7 +142,8 @@ class SelectionType extends Component {
         </fieldset>
 
         {this.renderErrorMessage()}
-
+        {this.renderSelectSizeButton()}
+       
       </form>
     )
   }
@@ -140,4 +151,4 @@ class SelectionType extends Component {
   
 
 
-export default connect(null, null)(SelectionType);
+export default connect(null, {selectType, renderSelectSize})(SelectType);
