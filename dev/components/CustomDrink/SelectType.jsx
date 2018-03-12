@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {selectType} from '../../actions/CustomDrink.js';
 import {renderSelectSize} from '../../actions/CustomDrink.js';
+import {goBackTo} from '../../actions/CustomDrink.js';
+import {renderPage} from '../utils.jsx';
 
 class SelectType extends Component {
   constructor(props){
@@ -127,6 +129,8 @@ class SelectType extends Component {
     
     const HotCoffee = ["Coffee", "Latte", "Americano", "Espresso", "Cappuccino", "Flat White", "Macchiato", "Mocha", "Frappuchino"];
 
+    const {goBackTo} = this.props;
+
     return (
       <form>
         <h1>What cup o' Joe would you like?</h1>
@@ -141,7 +145,11 @@ class SelectType extends Component {
         </fieldset>
 
         {this.renderErrorMessage()}
-        {this.renderSelectSizeButton()}
+        
+        <div>
+          <button onClick={() => goBackTo('selectionPage')}>Go Back and Make a Selection</button>
+          {this.renderSelectSizeButton()}
+        </div>
        
       </form>
     )
@@ -150,4 +158,4 @@ class SelectType extends Component {
   
 
 
-export default connect(null, {selectType, renderSelectSize})(SelectType);
+export default connect(null, {selectType, renderSelectSize, goBackTo})(SelectType);

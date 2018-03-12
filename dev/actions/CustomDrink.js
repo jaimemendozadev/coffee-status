@@ -1,6 +1,20 @@
+export const GO_BACK_TO = 'GO_BACK_TO';
+
+export const goBackTo = (page) => {
+  return {
+    type: GO_BACK_TO,
+    payload: page 
+  }
+}
+
+
+
+
+
 /*****************************
 * Select Drink: Coffee or Tea
 ******************************/
+
 export const SELECT_DRINK = 'SELECT_DRINK';
 
 export const selectDrink = drink => {

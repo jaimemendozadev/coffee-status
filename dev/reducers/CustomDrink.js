@@ -1,3 +1,4 @@
+import {GO_BACK_TO} from '../actions/CustomDrink.js';
 import {SELECT_DRINK} from '../actions/CustomDrink.js';
 import {RENDER_SELECT_TYPE} from '../actions/CustomDrink.js';
 import {SELECT_TYPE} from '../actions/CustomDrink.js';
@@ -25,6 +26,12 @@ const defaultDrinkState = {
 
 const CustomDrink = (state = defaultDrinkState, action) => {
   switch(action.type){
+    case GO_BACK_TO:
+      console.log("the state in go back to ", state)
+      const test = {...state, current_page: action.payload}
+      console.log("new state ", test)
+      return {...state, current_page: action.payload};
+
     case SELECT_DRINK:
       return {...state, drink: action.payload};
       
