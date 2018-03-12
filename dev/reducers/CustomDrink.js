@@ -19,7 +19,8 @@ const defaultDrinkState = {
   selected_size: '',
   selected_milk: '',
   selected_sweetness: [],
-  selected_topings: []  
+  selected_topings: [],
+  arrive_at_confirmation: false,  
 }
 
 
@@ -27,9 +28,6 @@ const defaultDrinkState = {
 const CustomDrink = (state = defaultDrinkState, action) => {
   switch(action.type){
     case GO_BACK_TO:
-      console.log("the state in go back to ", state)
-      const test = {...state, current_page: action.payload}
-      console.log("new state ", test)
       return {...state, current_page: action.payload};
 
     case SELECT_DRINK:
@@ -66,7 +64,7 @@ const CustomDrink = (state = defaultDrinkState, action) => {
       return {...state, selected_topings: action.payload};
   
     case RENDER_CONFIRMATION:
-      return {...state, current_page: action.payload};
+      return {...state, current_page: action.payload, arrive_at_confirmation: true };
 
   }
   return state;

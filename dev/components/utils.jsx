@@ -8,7 +8,6 @@ import SelectToppings from './CustomDrink/SelectToppings.jsx';
 import ConfirmationPage from './CustomDrink/ConfirmationPage.jsx';
 
 export const renderPage = currentPage => {
-
   if(currentPage == 'selectionPage'){
     return <SelectionPage />
   }  

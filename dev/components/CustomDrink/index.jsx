@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 const CustomDrink = ({current_page}) => (
   <div>
     <DisplaySelection />
-    
+
     {renderPage(current_page)}
   </div>
 )
