@@ -8,6 +8,8 @@ import {SELECT_MILK} from '../actions/selectMilk.js';
 import {RENDER_SELECT_SWEETNESS} from '../actions/renderSelectSweetness.js';
 import {SELECT_SWEETNESS} from '../actions/selectSweetness.js';
 import {RENDER_SELECT_TOPPINGS} from '../actions/renderSelectToppings';
+import {SELECT_TOPPINGS} from '../actions/selectToppings.js';
+import {RENDER_CONFIRMATION} from '../actions/renderConfirmation.js';
 
 const defaultDrinkState = {
   current_page: 'selectionPage',
@@ -16,7 +18,7 @@ const defaultDrinkState = {
   selected_size: '',
   selected_milk: '',
   selected_sweetness: [],
-  other_options: []  
+  selected_topings: []  
 }
 
 
@@ -51,6 +53,12 @@ const CustomDrink = (state = defaultDrinkState, action) => {
       return {...state, selected_sweetness: action.payload};
 
     case RENDER_SELECT_TOPPINGS:
+      return {...state, current_page: action.payload};
+    
+    case SELECT_TOPPINGS:
+      return {...state, selected_topings: action.payload};
+  
+    case RENDER_CONFIRMATION:
       return {...state, current_page: action.payload};
 
   }

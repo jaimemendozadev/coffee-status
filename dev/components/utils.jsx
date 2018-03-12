@@ -5,6 +5,7 @@ import SelectSize from './CustomDrink/SelectSize.jsx';
 import SelectMilk from './CustomDrink/SelectMilk.jsx';
 import SelectSweetness from './CustomDrink/SelectSweetness.jsx';
 import SelectToppings from './CustomDrink/SelectToppings.jsx';
+import ConfirmationPage from './CustomDrink/ConfirmationPage.jsx';
 
 export const renderPage = currentPage => {
 
@@ -34,9 +35,9 @@ export const renderPage = currentPage => {
     return <SelectToppings />
   }  
   
-  /*
+  
   if(currentPage == 'confirmationPage'){  
+    return <ConfirmationPage />
   }
-  */
 
 }
