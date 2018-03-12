@@ -106,8 +106,7 @@ class SelectType extends Component {
 
         //update state
         newState.errorMessage = "Unclick the last selection to make a new selection.";
-        newState[temp][name] = false;
-      
+  
         this.setState(newState);
 
       } else {
