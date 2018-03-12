@@ -10,7 +10,7 @@ class CustomDrink extends Component {
   }
 
   render () {
-    const { current_page, drink, type, selected_size, selected_milk, other_options } = this.props;
+    const { current_page, drink, type, selected_size, selected_milk, selected_sweetness, other_options } = this.props;
     return (
       <div>
         <h1>Create a Custom Drink</h1>
@@ -21,6 +21,7 @@ class CustomDrink extends Component {
             <li>Type: {!type ? '' : type.join(" ")}</li>
             <li>Size: {selected_size}</li>
             <li>Milk Type: {selected_milk}</li>
+            <li>Sweetness Type &amp; Quantity: {!selected_sweetness ? '' : selected_sweetness.join(" ")}</li>
             <li>Options: {!other_options ? '' : other_options.join(" ")}</li>
           </ul>
         </div>
@@ -32,13 +33,14 @@ class CustomDrink extends Component {
   }
 }
 
-function mapStateToProps({ CustomDrink: {current_page, drink, type, selected_size,selected_milk, other_options } }){
+function mapStateToProps({ CustomDrink: {current_page, drink, type, selected_size, selected_milk, selected_sweetness, other_options } }){
   return {
     current_page,
     drink,
     type,
     selected_size,
     selected_milk,
+    selected_sweetness,
     other_options
   }
 }

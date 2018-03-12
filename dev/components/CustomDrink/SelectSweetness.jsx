@@ -1,23 +1,34 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import {selectSweetness} from '../../actions/selectSweetness.js';
+import {renderSelectToppings} from '../../actions/renderSelectToppings.js';
 
 class SelectSweetness extends Component {
   constructor(props){
     super(props);
     this.state = {
-      "some_state": false,
-
+      "Equal": false,
+      "Sugar in the Raw": false,
+      "Stevia": false,
+      "Honey": false,
+      "Splenda": false,
+      "Sugar": false,
+      "Sweet 'n Low": false,
+      "Quantity": "0",
+      "currentSelection": '',
+      "madeSelection": false,
+      "errorMessage": ''
     }
 
-    // this.renderErrorMessage = this.renderErrorMessage.bind(this);
-    // this.renderSweetButton = this.renderSweetButton.bind(this);
-    // this.renderInputFields = this.renderInputFields.bind(this);
-    // this.handleInputChange = this.handleInputChange.bind(this);
+    this.renderErrorMessage = this.renderErrorMessage.bind(this);
+    this.renderToppingsButton = this.renderToppingsButton.bind(this);
+    this.renderInputFields = this.renderInputFields.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 
   }
 
-  /*
+  
 
   renderErrorMessage(){
     if (this.state.errorMessage){
@@ -27,68 +38,93 @@ class SelectSweetness extends Component {
 
   
 
-  renderSweetButton(){
-    const {renderSelectSweetness} = this.props;
+  renderToppingsButton(){
+    const {renderSelectToppings} = this.props;
     
     if (this.state.madeSelection){
-     return <button onClick={() => renderSelectSweetness()}>Select Level of Sweetness</button>;
+     return <button onClick={() => renderSelectToppings()}>Select Drink Toppings</button>;
     }
   }
   
 
-  renderInputFields(MilkArray){
-    return MilkArray.map((MilkType, idx) => {
+  renderInputFields(SweetArray){
+    return SweetArray.map((SweetType, idx) => {
       return (
-        <label key={`${MilkType + idx}`}>{MilkType}
+        <label key={`${SweetType + idx}`}>{SweetType}
           <input
             type="checkbox"
-            name={MilkType}
-            checked={this.state[MilkType]}
+            name={SweetType}
+            checked={this.state[SweetType]}
             onClick={(event) => this.handleInputChange(event)} />
         </label> 
       )
     });  
   }
 
+  handleFormChange(event){
+    let newState;
+    const {selectSweetness} = this.props;
+    const {currentSelection} = this.state;
+
+    let formInput = event.target.value;
+    formInput = parseInt(formInput, 10);
+
+    
+
+    if(isNaN(formInput)){
+
+      this.setState({
+        "errorMessage": 'Please enter a valid number'    
+      });
+
+    } else {
+      newState = {...this.state};
+      newState.Quantity = formInput;
+      newState.errorMessage = ''
+    
+      this.setState(newState, () => selectSweetness(currentSelection, formInput));
+    }
+  }
+
 
   handleInputChange(event) {
-    const {madeSelection} = this.state;
-    const {selectMilk} = this.props;
+    const {madeSelection, Quantity} = this.state;
+    const {selectSweetness} = this.props;
     
     let newState;
 
     //value is boolean that checks if input is clicked
     const value = event.target.checked;
 
-    //get milk type from name attr 
-    const MilkType = event.target.name;
+    //get sweetness type from name attr 
+    const SweetType = event.target.name;
 
 
     //when nothing's been selected
     if (madeSelection == false){
       //make copy of old state
-      newState = {...this.state}
+      newState = {...this.state};
 
       //update state
-      newState[MilkType] = value;
+      newState[SweetType] = value;
+      newState.currentSelection = SweetType;
       newState.madeSelection = true;
       newState.errorMessage = null;
-      this.setState(newState, () => selectMilk(MilkType));
+      this.setState(newState, () => selectSweetness(SweetType, Quantity));
     }
 
-    //Note: might want to give customers option of choosing 
-    //more than one type of milk
+
 
     if (madeSelection) {
 
       //if you try to make more than one selection
-      if (this.state[MilkType] == false) {
+      if (this.state[SweetType] == false) {
 
         //make copy of old state
         newState = {...this.state};
 
         //update state
-        newState.errorMessage = "Unclick the last selection to select a new milk option.";
+        newState.errorMessage = "Unclick the last selection to select a new sweetner option.";
     
         this.setState(newState);
 
@@ -97,31 +133,45 @@ class SelectSweetness extends Component {
         newState = {...this.state}
 
         //update state
-        newState[MilkType] = value;
+        newState[SweetType] = value;
+        newState.currentSelection = '';
         newState.madeSelection = false;
         newState.errorMessage = null;
-        this.setState(newState, () => selectMilk('')); 
+        
+        //revert sweetness quantity to 0 
+        newState.Quantity = "0";
+
+        this.setState(newState, () => selectSweetness('','')); 
       }
     }
   }
 
-  */
+
 
   render(){
+    const SweetArray = ["Equal", "Sugar in the Raw", "Stevia", "Honey", "Splenda", "Sugar", "Sweet 'n Low"];
+    const {Quantity} = this.state;
     return (
       <form>
         <h1>Select the Level of Sweetness for Your Drink</h1>
         <fieldset>
-          <legend>Size</legend>
-            {/* {this.renderInputFields(MilkTypes)} */}
+          <legend>Sweetness</legend>
+            {this.renderInputFields(SweetArray)}
+            <label>Quantity
+            <input
+              value={Quantity}
+              type="text"
+              name={"Quantity"}
+              onChange={this.handleFormChange} />
+            </label> 
         </fieldset>  
     
-        {/* {this.renderErrorMessage()}
-        {this.renderSweetButton()} */}
+        {this.renderErrorMessage()}
+        {this.renderToppingsButton()} 
        
       </form>
     )
   }
 }
 
-export default connect(null, null)(SelectSweetness);
+export default connect(null, {selectSweetness, renderSelectToppings})(SelectSweetness);

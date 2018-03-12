@@ -118,7 +118,7 @@ class SelectMilk extends Component {
       <form>
         <h1>Select the Type of Milk for Your Drink</h1>
         <fieldset>
-          <legend>Size</legend>
+          <legend>Milk</legend>
             {this.renderInputFields(MilkTypes)}
         </fieldset>  
     
