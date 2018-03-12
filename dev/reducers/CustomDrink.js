@@ -1,15 +1,15 @@
-import {SELECT_DRINK} from '../actions/selectDrink.js';
-import {RENDER_SELECT_TYPE} from '../actions/renderSelectType.js';
-import {SELECT_TYPE} from '../actions/selectType.js';
-import {RENDER_SELECT_SIZE} from '../actions/renderSelectSize.js';
-import {SELECT_SIZE} from '../actions/selectSize.js'
-import {RENDER_SELECT_MILK} from '../actions/renderSelectMilk.js';
-import {SELECT_MILK} from '../actions/selectMilk.js';
-import {RENDER_SELECT_SWEETNESS} from '../actions/renderSelectSweetness.js';
-import {SELECT_SWEETNESS} from '../actions/selectSweetness.js';
-import {RENDER_SELECT_TOPPINGS} from '../actions/renderSelectToppings';
-import {SELECT_TOPPINGS} from '../actions/selectToppings.js';
-import {RENDER_CONFIRMATION} from '../actions/renderConfirmation.js';
+import {SELECT_DRINK} from '../actions/index.js';
+import {RENDER_SELECT_TYPE} from '../actions/index.js';
+import {SELECT_TYPE} from '../actions/index.js';
+import {RENDER_SELECT_SIZE} from '../actions/index.js';
+import {SELECT_SIZE} from '../actions/index.js'
+import {RENDER_SELECT_MILK} from '../actions/index.js';
+import {SELECT_MILK} from '../actions/index';
+import {RENDER_SELECT_SWEETNESS} from '../actions/index.js';
+import {SELECT_SWEETNESS} from '../actions/index.js';
+import {RENDER_SELECT_TOPPINGS} from '../actions/index';
+import {SELECT_TOPPINGS} from '../actions/index.js';
+import {RENDER_CONFIRMATION} from '../actions/index.js';
 
 const defaultDrinkState = {
   current_page: 'selectionPage',

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderConfirmation} from '../../actions/renderConfirmation.js';
-import {selectToppings} from '../../actions/selectToppings.js';
+import {selectToppings} from '../../actions/index.js';
+import {renderConfirmation} from '../../actions/index.js';
 
 class SelectToppings extends Component {
   constructor(props){

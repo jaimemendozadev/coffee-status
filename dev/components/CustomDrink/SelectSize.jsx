@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {selectSize} from '../../actions/selectSize.js';
-import {renderSelectMilk} from '../../actions/renderSelectMilk.js';
+import {selectSize} from '../../actions/index.js';
+import {renderSelectMilk} from '../../actions/index.js';
 
 class SelectSize extends Component {
   constructor(props){
