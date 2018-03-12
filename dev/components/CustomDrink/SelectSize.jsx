@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectSize} from '../../actions/CustomDrink.js';
 import {renderSelectMilk} from '../../actions/CustomDrink.js';
 
@@ -108,6 +109,7 @@ class SelectSize extends Component {
 
   render(){
     const Sizes = ["Short", "Small", "Medium", "Large", "X-Large"];
+    const {goBackTo} = this.props;
 
     return (
       <form>
@@ -118,11 +120,15 @@ class SelectSize extends Component {
         </fieldset>  
     
         {this.renderErrorMessage()}
-        {this.renderMilkButton()}
+        
+        <div>
+          <button onClick={() => goBackTo('selectType')}>Go Back and Make a Selection</button>
+          {this.renderMilkButton()}
+        </div>
        
       </form>
     )
   }
 }
 
-export default connect(null, {selectSize, renderSelectMilk})(SelectSize);
+export default connect(null, {selectSize, renderSelectMilk, goBackTo})(SelectSize);

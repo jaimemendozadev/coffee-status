@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectSweetness} from '../../actions/CustomDrink.js';
 import {renderSelectToppings} from '../../actions/CustomDrink.js';
 
@@ -151,6 +152,8 @@ class SelectSweetness extends Component {
   render(){
     const SweetArray = ["Equal", "Sugar in the Raw", "Stevia", "Honey", "Splenda", "Sugar", "Sweet 'n Low"];
     const {Quantity} = this.state;
+    const {goBackTo} = this.props;
+
     return (
       <form>
         <h1>Select the Level of Sweetness for Your Drink</h1>
@@ -167,11 +170,14 @@ class SelectSweetness extends Component {
         </fieldset>  
     
         {this.renderErrorMessage()}
-        {this.renderToppingsButton()} 
-       
+
+        <div>
+          <button onClick={() => goBackTo('toggleMilk')}>Go Back and Change the Milk Type</button>
+          {this.renderToppingsButton()} 
+        </div>
       </form>
     )
   }
 }
 
-export default connect(null, {selectSweetness, renderSelectToppings})(SelectSweetness);
+export default connect(null, {selectSweetness, renderSelectToppings, goBackTo})(SelectSweetness);

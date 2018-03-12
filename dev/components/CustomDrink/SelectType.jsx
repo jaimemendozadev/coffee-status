@@ -147,7 +147,7 @@ class SelectType extends Component {
         {this.renderErrorMessage()}
         
         <div>
-          <button onClick={() => goBackTo('selectionPage')}>Go Back and Make a Selection</button>
+          <button onClick={() => goBackTo('selectionPage')}>Go Back and Pick a Different Type</button>
           {this.renderSelectSizeButton()}
         </div>
        
