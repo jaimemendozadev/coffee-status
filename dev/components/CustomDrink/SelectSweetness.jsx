@@ -1,28 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {renderSelectSweetness} from '../../actions/renderSelectSweetness.js';
-import {selectMilk} from '../../actions/selectMilk.js';
 
-class SelectMilk extends Component {
+
+class SelectSweetness extends Component {
   constructor(props){
     super(props);
     this.state = {
-      "Low Fat Milk": false,
-      "2% Milk": false,
-      "Whole Milk": false,
-      "Coconut Milk": false,
-      "Almond Milk": false,
-      "Soy Milk": false,
-      "madeSelection": false,
-      "errorMessage": ''
+      "some_state": false,
+
     }
 
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
-    this.renderSweetButton = this.renderSweetButton.bind(this);
-    this.renderInputFields = this.renderInputFields.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    // this.renderErrorMessage = this.renderErrorMessage.bind(this);
+    // this.renderSweetButton = this.renderSweetButton.bind(this);
+    // this.renderInputFields = this.renderInputFields.bind(this);
+    // this.handleInputChange = this.handleInputChange.bind(this);
 
   }
+
+  /*
 
   renderErrorMessage(){
     if (this.state.errorMessage){
@@ -110,24 +105,23 @@ class SelectMilk extends Component {
     }
   }
 
-
+  */
 
   render(){
-    const MilkTypes = ["Low Fat Milk", "2% Milk", "Whole Milk", "Coconut Milk", "Almond Milk", "Soy Milk"];
     return (
       <form>
-        <h1>Select the Type of Milk for Your Drink</h1>
+        <h1>Select the Level of Sweetness for Your Drink</h1>
         <fieldset>
           <legend>Size</legend>
-            {this.renderInputFields(MilkTypes)}
+            {/* {this.renderInputFields(MilkTypes)} */}
         </fieldset>  
     
-        {this.renderErrorMessage()}
-        {this.renderSweetButton()}
+        {/* {this.renderErrorMessage()}
+        {this.renderSweetButton()} */}
        
       </form>
     )
   }
 }
 
-export default connect(null, {selectMilk, renderSelectSweetness})(SelectMilk);
+export default connect(null, null)(SelectSweetness);

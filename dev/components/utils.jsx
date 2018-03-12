@@ -4,6 +4,8 @@ import SelectionPage from './CustomDrink/SelectionPage.jsx';
 import SelectType from './CustomDrink/SelectType.jsx';
 import SelectSize from './CustomDrink/SelectSize.jsx';
 import SelectMilk from './CustomDrink/SelectMilk.jsx';
+import SelectSweetness from './CustomDrink/SelectSweetness.jsx';
+
 
 export const renderPage = currentPage => {
 
@@ -23,9 +25,12 @@ export const renderPage = currentPage => {
     return <SelectMilk />
   }
   
-  /*
+  
   if(currentPage == 'toggleSweet'){  
+    return <SelectSweetness />
   }  
+  
+  /*
   if(currentPage == 'toggleToppings'){  
   }  
   if(currentPage == 'confirmationPage'){  
