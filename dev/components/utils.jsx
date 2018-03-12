@@ -40,4 +40,10 @@ export const renderPage = currentPage => {
     return <ConfirmationPage />
   }
 
+  if(!currentPage){
+    return <h1>Waiting for data...</h1>
+  }
+
+
+
 }
