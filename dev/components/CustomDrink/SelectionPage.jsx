@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {selectDrink} from '../../actions/index.js';
-import {renderSelectType} from '../../actions/index.js';
+import {selectDrink} from '../../actions/CustomDrink.js';
+import {renderSelectType} from '../../actions/CustomDrink.js';
 
 
 

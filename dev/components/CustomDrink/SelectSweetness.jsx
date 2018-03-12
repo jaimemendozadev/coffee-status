@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {selectSweetness} from '../../actions/index.js';
-import {renderSelectToppings} from '../../actions/index.js';
+import {selectSweetness} from '../../actions/CustomDrink.js';
+import {renderSelectToppings} from '../../actions/CustomDrink.js';
 
 class SelectSweetness extends Component {
   constructor(props){

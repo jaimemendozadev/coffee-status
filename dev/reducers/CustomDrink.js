@@ -1,15 +1,15 @@
-import {SELECT_DRINK} from '../actions/index.js';
-import {RENDER_SELECT_TYPE} from '../actions/index.js';
-import {SELECT_TYPE} from '../actions/index.js';
-import {RENDER_SELECT_SIZE} from '../actions/index.js';
-import {SELECT_SIZE} from '../actions/index.js'
-import {RENDER_SELECT_MILK} from '../actions/index.js';
-import {SELECT_MILK} from '../actions/index';
-import {RENDER_SELECT_SWEETNESS} from '../actions/index.js';
-import {SELECT_SWEETNESS} from '../actions/index.js';
-import {RENDER_SELECT_TOPPINGS} from '../actions/index';
-import {SELECT_TOPPINGS} from '../actions/index.js';
-import {RENDER_CONFIRMATION} from '../actions/index.js';
+import {SELECT_DRINK} from '../actions/CustomDrink.js';
+import {RENDER_SELECT_TYPE} from '../actions/CustomDrink.js';
+import {SELECT_TYPE} from '../actions/CustomDrink.js';
+import {RENDER_SELECT_SIZE} from '../actions/CustomDrink.js';
+import {SELECT_SIZE} from '../actions/CustomDrink.js'
+import {RENDER_SELECT_MILK} from '../actions/CustomDrink.js';
+import {SELECT_MILK} from '../actions/CustomDrink.js';
+import {RENDER_SELECT_SWEETNESS} from '../actions/CustomDrink.js';
+import {SELECT_SWEETNESS} from '../actions/CustomDrink.js';
+import {RENDER_SELECT_TOPPINGS} from '../actions/CustomDrink.js';
+import {SELECT_TOPPINGS} from '../actions/CustomDrink.js';
+import {RENDER_CONFIRMATION} from '../actions/CustomDrink.js';
 
 const defaultDrinkState = {
   current_page: 'selectionPage',
