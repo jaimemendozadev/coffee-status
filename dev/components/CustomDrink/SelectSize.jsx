@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {selectSize} from '../../actions/selectSize.js';
+import {renderSelectMilk} from '../../actions/renderSelectMilk.js';
 
 class SelectSize extends Component {
   constructor(props){
@@ -14,7 +17,7 @@ class SelectSize extends Component {
     }
     
     this.renderErrorMessage = this.renderErrorMessage.bind(this);
-    // this.renderSelectMilkButton = this.renderSelectMilkButton.bind(this);
+    this.renderMilkButton = this.renderMilkButton.bind(this);
     this.renderInputFields = this.renderInputFields.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -25,16 +28,16 @@ class SelectSize extends Component {
     }
   }
 
-  /*
+  
 
-  renderSelectMilkButton(){
-    const {renderSelectSize} = this.props;
+  renderMilkButton(){
+    const {renderSelectMilk} = this.props;
     
     if (this.state.madeSelection){
      return <button onClick={() => renderSelectMilk()}>Select Type of Milk</button>;
     }
   }
-  */
+  
 
   renderInputFields(SizesArray){
     return SizesArray.map((size, idx) => {
@@ -53,6 +56,7 @@ class SelectSize extends Component {
 
   handleInputChange(event) {
     const {madeSelection} = this.state;
+    const {selectSize} = this.props;
     
     let newState;
 
@@ -72,7 +76,7 @@ class SelectSize extends Component {
       newState[size] = value;
       newState.madeSelection = true;
       newState.errorMessage = null;
-      this.setState(newState);//needs callback
+      this.setState(newState, () => selectSize(size));
     }
 
 
@@ -97,7 +101,7 @@ class SelectSize extends Component {
         newState[size] = value;
         newState.madeSelection = false;
         newState.errorMessage = null;
-        this.setState(newState); //needs callback
+        this.setState(newState, () => selectSize('')); 
       }
     }
   }
@@ -107,18 +111,18 @@ class SelectSize extends Component {
 
     return (
       <form>
-        <h1>Pick a Size for you Drink</h1>
+        <h1>Pick a Size for Your Drink</h1>
         <fieldset>
           <legend>Size</legend>
             {this.renderInputFields(Sizes)}
         </fieldset>  
     
         {this.renderErrorMessage()}
-        {/* this.renderSelectMilkButton() */}
+        {this.renderMilkButton()}
        
       </form>
     )
   }
 }
 
-export default SelectSize;
+export default connect(null, {selectSize, renderSelectMilk})(SelectSize);

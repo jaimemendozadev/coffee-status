@@ -3,13 +3,14 @@ import React from 'react';
 import SelectionPage from './CustomDrink/SelectionPage.jsx';
 import SelectType from './CustomDrink/SelectType.jsx';
 import SelectSize from './CustomDrink/SelectSize.jsx';
-
+import SelectMilk from './CustomDrink/SelectMilk.jsx';
 
 export const renderPage = currentPage => {
 
   if(currentPage == 'selectionPage'){
     return <SelectionPage />
   }  
+
   if(currentPage == 'selectType'){
     return <SelectType />
   }
@@ -18,10 +19,11 @@ export const renderPage = currentPage => {
     return <SelectSize />      
   }  
 
-
-  /*
   if(currentPage == 'toggleMilk'){  
-  }  
+    return <SelectMilk />
+  }
+  
+  /*
   if(currentPage == 'toggleSweet'){  
   }  
   if(currentPage == 'toggleToppings'){  
