@@ -1,12 +1,14 @@
 const Router = require('express').Router();
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const {makeACall} = require('../utils.js');
+const {makeACall, createCustomDrink} = require('./controllers');
 
 Router.get('/', (req, res) => {
   res.send('hit the api bruh');
 });
 
 Router.post('/orderresponse', makeACall);
+
+Router.post('/customdrink', createCustomDrink);
 
 
 Router.post('/order', (req, res) => {

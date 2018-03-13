@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {connect} from 'react-redux';
-const API = `http://localhost:3000/api/`;
+const API = `http://localhost:3000/api/customdrink`;
 
 class ConfirmationPage extends Component {
 
