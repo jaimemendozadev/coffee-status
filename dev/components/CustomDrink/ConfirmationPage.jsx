@@ -1,26 +1,42 @@
 import React, {Component} from 'react';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {connect} from 'react-redux';
-
-
-text => event => {
-  event.preventDefault()
-  console.log(text)
-}
-
+const API = `http://localhost:3000/api/`;
 
 class ConfirmationPage extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      serverMessage: ''
+    }
+  }
   
-  placeOrder(order) {
+  placeOrder(CustomDrink) {
 
     return (event) => {
       event.preventDefault();
-      console.log("args inside placeOrder ", order)
+
+      const {current_page, drink, type, selected_size, selected_milk, selected_sweetness, selected_topings } = CustomDrink;
+
+      const payload = {
+        drink, 
+        type,
+        selected_size, 
+        selected_milk, 
+        selected_sweetness
+        selected_topings
+      }
+
+      let API_OPTIONS = {
+        method: 'POST',
+        headers : new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(payload)
+      };
+  
+      fetch(API, API_OPTIONS);
 
     }
-  
-  
-  
   }
 
   render() {
@@ -50,6 +66,7 @@ class ConfirmationPage extends Component {
   
 }
 
+//{ CustomDrink: {current_page, drink, type, selected_size, selected_milk, selected_sweetness, selected_topings } }
 
 function mapStateToProps({CustomDrink}){
   return { 
@@ -58,3 +75,6 @@ function mapStateToProps({CustomDrink}){
 }
 
 export default connect(mapStateToProps, {goBackTo})(ConfirmationPage);
+
+
+//'selectionPage', 'selectType', 'toggleSize', 'toggleMilk', 'toggleSweet', 'toggleToppings', 'confirmationPage'
