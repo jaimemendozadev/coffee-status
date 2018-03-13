@@ -23,7 +23,7 @@ class SelectSweetness extends Component {
       "errorMessage": ''
     }
 
-    
+    this.handleFinalCheck = this.handleFinalCheck.bind(this);
     this.renderToppingsButton = this.renderToppingsButton.bind(this);
     this.renderInputFields = this.renderInputFields.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -31,11 +31,26 @@ class SelectSweetness extends Component {
 
   }
 
-  renderToppingsButton(){
+  handleFinalCheck(){
+    const {currentSelection, Quantity} = this.state;
     const {renderSelectToppings} = this.props;
+
+    //if the user makes a selection but doesn't specify an amount > 0
+    if (currentSelection != 'No Sweetness' && Quantity == 0) {
+      
+      this.setState({errorMessage: 'Please specify an amount for the selected sweetness lever.'});
+
+    } else {
+
+      renderSelectToppings();
+    }
+  }
+
+  renderToppingsButton(){
+    const {madeSelection} = this.state;
     
-    if (this.state.madeSelection){
-     return <button onClick={() => renderSelectToppings()}>Select Drink Toppings</button>;
+    if (madeSelection){
+     return <button onClick={() => this.handleFinalCheck()}>Select Drink Toppings</button>;
     }
   }
   
@@ -102,11 +117,10 @@ class SelectSweetness extends Component {
       newState[SweetType] = value;
       newState.currentSelection = SweetType;
       newState.madeSelection = true;
+
       newState.errorMessage = null;
       this.setState(newState, () => selectSweetness(SweetType, Quantity));
     }
-
-
 
     if (madeSelection) {
 
@@ -140,7 +154,6 @@ class SelectSweetness extends Component {
   }
 
 
-
   render(){
     const SweetArray = ["Equal", "Sugar in the Raw", "Stevia", "Honey", "Splenda", "Sugar", "Sweet 'n Low", "No Sweetness"];
     const {Quantity} = this.state;
@@ -172,4 +185,10 @@ class SelectSweetness extends Component {
   }
 }
 
-export default connect(null, {selectSweetness, renderSelectToppings, goBackTo})(SelectSweetness);
+function mapStateToProps({CustomDrink: { selected_sweetness }}){
+  return {
+    selected_sweetness
+  }
+}
+
+export default connect(mapStateToProps, {selectSweetness, renderSelectToppings, goBackTo})(SelectSweetness);
