@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectMilk} from '../../actions/CustomDrink.js';
-import {renderInputFields} from '../utils.jsx';
-import {handleInputChange} from '../utils.jsx';
-import {renderErrorMessage} from '../utils.jsx';
 import {renderSelectSweetness} from '../../actions/CustomDrink.js';
-
+import {handleSubmit, renderInputFields, handleInputChange, renderErrorMessage} from '../utils.jsx';
 
 class SelectMilk extends Component {
   constructor(props){
@@ -29,9 +26,10 @@ class SelectMilk extends Component {
 
   renderSweetButton(){
     const {renderSelectSweetness} = this.props;
-    
-    if (this.state.madeSelection){
-     return <button onClick={() => renderSelectSweetness()}>Select Level of Sweetness</button>;
+    const {madeSelection} = this.state;
+
+    if (madeSelection){
+     return <button onClick={(event) => handleSubmit(event, renderSelectSweetness)}>Select Level of Sweetness</button>;
     }
   }
 
@@ -51,7 +49,7 @@ class SelectMilk extends Component {
         {renderErrorMessage(this.state)}
 
         <div>
-          <button onClick={() => goBackTo('toggleSize')}>Go Back and Change the Size</button>
+          <button onClick={(event) => handleSubmit(event, goBackTo, 'toggleSize')}>Go Back and Change the Size</button>
           {this.renderSweetButton()}
         </div>
        

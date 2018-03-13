@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectToppings} from '../../actions/CustomDrink.js';
 import {renderConfirmation} from '../../actions/CustomDrink.js';
-import {renderErrorMessage} from '../utils.jsx';
+import {handleSubmit, renderErrorMessage} from '../utils.jsx';
 
 class SelectToppings extends Component {
   constructor(props){
@@ -19,7 +19,7 @@ class SelectToppings extends Component {
       "errorMessage": ''
     }
 
-    
+    this.handleFinalCheck = this.handleFinalCheck.bind(this);
     this.renderConfirmationButton = this.renderConfirmationButton.bind(this);
     this.renderInputFields = this.renderInputFields.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -27,11 +27,27 @@ class SelectToppings extends Component {
 
   }
 
-  renderConfirmationButton(){
+  handleFinalCheck(event){
+    event.preventDefault();
+    const {currentSelection, Quantity} = this.state;
     const {renderConfirmation} = this.props;
-    
-    if (this.state.madeSelection){
-     return <button onClick={() => renderConfirmation()}>Confirm Your Custom Order</button>;
+
+    //if the user makes a selection but doesn't specify an amount > 0
+    if (currentSelection != 'No Toppings' && Quantity == 0) {
+      
+      this.setState({errorMessage: 'Please specify an amount for the selected topping.'});
+
+    } else {
+
+      renderConfirmation();
+    }
+  }
+
+  renderConfirmationButton(){
+    const {madeSelection} = this.state;
+
+    if (madeSelection){
+     return <button onClick={(event) => this.handleFinalCheck(event) }>Confirm Your Custom Order</button>;
     }
   }
   
@@ -159,7 +175,7 @@ class SelectToppings extends Component {
         {renderErrorMessage(this.state)}
 
         <div>
-          <button onClick={() => goBackTo('toggleSweet')}>Go Back and Change the Sweetness Level</button>
+          <button onClick={(event) => handleSubmit(event, goBackTo, 'toggleSweet')}>Go Back and Change the Sweetness Level</button>
           {this.renderConfirmationButton()} 
         </div>
        

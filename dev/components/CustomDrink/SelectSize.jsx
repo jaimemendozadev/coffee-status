@@ -3,9 +3,7 @@ import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectSize} from '../../actions/CustomDrink.js';
 import {renderSelectMilk} from '../../actions/CustomDrink.js';
-import {renderInputFields} from '../utils.jsx';
-import {handleInputChange} from '../utils.jsx';
-import {renderErrorMessage} from '../utils.jsx';
+import {handleSubmit, renderInputFields, handleInputChange, renderErrorMessage} from '../utils.jsx';
 
 class SelectSize extends Component {
   constructor(props){
@@ -28,9 +26,10 @@ class SelectSize extends Component {
 
   renderMilkButton(){
     const {renderSelectMilk} = this.props;
+    const {madeSelection} = this.state;
     
-    if (this.state.madeSelection){
-     return <button onClick={() => renderSelectMilk()}>Select Type of Milk</button>;
+    if (madeSelection){
+     return <button onClick={(event) => handleSubmit(event, renderSelectMilk)}>Select Type of Milk</button>;
     }
   }
 
@@ -52,7 +51,7 @@ class SelectSize extends Component {
         {renderErrorMessage(this.state)}
         
         <div>
-          <button onClick={() => goBackTo('selectType')}>Go Back and Make a Selection</button>
+          <button onClick={(event) => handleSubmit(event, goBackTo, 'selectType')}>Go Back and Make a Selection</button>
           {this.renderMilkButton()}
         </div>
        

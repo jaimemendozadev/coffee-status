@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectSweetness} from '../../actions/CustomDrink.js';
 import {renderSelectToppings} from '../../actions/CustomDrink.js';
-import {renderErrorMessage} from '../utils.jsx';
+import {handleSubmit, renderErrorMessage} from '../utils.jsx';
 
 class SelectSweetness extends Component {
   constructor(props){
@@ -31,7 +31,9 @@ class SelectSweetness extends Component {
 
   }
 
-  handleFinalCheck(){
+  handleFinalCheck(event){
+    event.preventDefault();
+
     const {currentSelection, Quantity} = this.state;
     const {renderSelectToppings} = this.props;
 
@@ -50,7 +52,7 @@ class SelectSweetness extends Component {
     const {madeSelection} = this.state;
     
     if (madeSelection){
-     return <button onClick={() => this.handleFinalCheck()}>Select Drink Toppings</button>;
+     return <button onClick={(event) => this.handleFinalCheck(event)}>Select Drink Toppings</button>;
     }
   }
   
@@ -177,7 +179,7 @@ class SelectSweetness extends Component {
         {renderErrorMessage(this.state)}
 
         <div>
-          <button onClick={() => goBackTo('toggleMilk')}>Go Back and Change the Milk Type</button>
+          <button onClick={(event) => handleSubmit(event, goBackTo, 'toggleMilk')}>Go Back and Change the Milk Type</button>
           {this.renderToppingsButton()} 
         </div>
       </form>

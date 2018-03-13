@@ -59,6 +59,16 @@ export const renderErrorMessage = (state) => {
   }
 }
 
+export const handleSubmit = (event, action, args = false) => {
+  event.preventDefault();
+
+  if (args) {
+    action(args);
+  } else {
+    action();
+  }
+}
+
 
 export const renderInputFields = (InputsArray, state, setStateCallback, callback, actionCallback, inputNameType) => (
   InputsArray.map((inputKey, idx) => {

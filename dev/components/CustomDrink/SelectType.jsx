@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {selectType} from '../../actions/CustomDrink.js';
 import {renderSelectSize} from '../../actions/CustomDrink.js';
 import {goBackTo} from '../../actions/CustomDrink.js';
-import {renderPage} from '../utils.jsx';
+import {renderPage, handleSubmit} from '../utils.jsx';
 
 class SelectType extends Component {
   constructor(props){
@@ -51,9 +51,10 @@ class SelectType extends Component {
 
   renderSelectSizeButton(){
     const {renderSelectSize} = this.props;
+    const {madeSelection} = this.state;
     
-    if (this.state.madeSelection){
-     return <button onClick={() => renderSelectSize()}>Select a Size</button>;
+    if (madeSelection){
+     return <button onClick={(event) => handleSubmit(event, renderSelectSize)}>Select a Size</button>;
     }
   }
 
@@ -147,7 +148,7 @@ class SelectType extends Component {
         {this.renderErrorMessage()}
         
         <div>
-          <button onClick={() => goBackTo('selectionPage')}>Go Back and Pick a Different Type</button>
+          <button onClick={(event) => handleSubmit(event, goBackTo, 'selectionPage')}>Go Back and Pick a Different Type</button>
           {this.renderSelectSizeButton()}
         </div>
        
