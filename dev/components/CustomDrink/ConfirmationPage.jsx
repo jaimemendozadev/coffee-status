@@ -13,7 +13,6 @@ class ConfirmationPage extends Component {
   }
   
   placeOrder(CustomDrink) {
-
     return (event) => {
       event.preventDefault();
 
@@ -24,7 +23,7 @@ class ConfirmationPage extends Component {
         type,
         selected_size, 
         selected_milk, 
-        selected_sweetness
+        selected_sweetness,
         selected_topings
       }
 
@@ -34,7 +33,12 @@ class ConfirmationPage extends Component {
         body: JSON.stringify(payload)
       };
   
-      fetch(API, API_OPTIONS);
+      fetch(API, API_OPTIONS).then(result => {
+        console.log("the result from the server ", result);
+      })
+      .catch(error => {
+        console.log("got an error from server ", error)  
+      });
 
     }
   }

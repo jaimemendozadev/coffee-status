@@ -23,12 +23,14 @@ const makeACall = (req, res) => {
 
 
 const createCustomDrink = (req, res) => {
-  console.log('hit createACustomDrink ', req.body)
+  console.log('hit createACustomDrink ', req.body);
+  res.send('hit createACustomDrink');
 }
 
 
 
 
 module.exports = {
-  makeACall
+  makeACall,
+  createCustomDrink
 }
