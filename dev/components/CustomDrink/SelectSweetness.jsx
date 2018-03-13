@@ -15,6 +15,7 @@ class SelectSweetness extends Component {
       "Splenda": false,
       "Sugar": false,
       "Sweet 'n Low": false,
+      "No Sweetness": false,
       "Quantity": "0",
       "currentSelection": '',
       "madeSelection": false,
@@ -150,7 +151,7 @@ class SelectSweetness extends Component {
 
 
   render(){
-    const SweetArray = ["Equal", "Sugar in the Raw", "Stevia", "Honey", "Splenda", "Sugar", "Sweet 'n Low"];
+    const SweetArray = ["Equal", "Sugar in the Raw", "Stevia", "Honey", "Splenda", "Sugar", "Sweet 'n Low", "No Sweetness"];
     const {Quantity} = this.state;
     const {goBackTo} = this.props;
 

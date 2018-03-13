@@ -119,7 +119,7 @@ export const renderSelectSweetness = () => {
 export const SELECT_SWEETNESS = 'SELECT_SWEETNESS';
 
 export const selectSweetness = (sweetness, quantity) => {
-  const payload = [sweetness, quantity];
+  const payload = (sweetness == 'No Sweetness') ? [sweetness] : [sweetness, quantity];
 
   return {
     type: SELECT_SWEETNESS,
@@ -144,7 +144,7 @@ export const renderSelectToppings = () => {
 export const SELECT_TOPPINGS = 'SELECT_TOPPINGS';
 
 export const selectToppings = (toppings, quantity) => {
-  const payload = [toppings, quantity];
+  const payload = (toppings == 'No Toppings') ? [toppings] : [toppings, quantity];
 
   return {
     type: SELECT_TOPPINGS,

@@ -43,6 +43,88 @@ export const renderPage = currentPage => {
     return <h1>Waiting for data...</h1>
   }
 
+}
 
+
+
+
+
+/******************
+* Form Functions
+*******************/
+
+export const renderErrorMessage = (state) => {
+  if (state.errorMessage){
+    return <div>{state.errorMessage}</div>
+  }
+}
+
+
+export const renderInputFields = (InputsArray, state, setStateCallback, callback, actionCallback, inputNameType) => (
+  InputsArray.map((inputKey, idx) => {
+    return (
+      <label key={`${inputKey + idx}`}>{inputKey}
+        <input
+          type="checkbox"
+          name={inputKey}
+          checked={state[inputKey]}
+          onClick={(event) => callback(event, state, setStateCallback, actionCallback, inputNameType)} />
+      </label> 
+    )
+  })
+)
+
+
+export const handleInputChange = (event, state, setStateCallback, actionCallback, inputNameType) => {
+  const {madeSelection} = state;
+  
+  let newState;
+
+  //value is boolean that checks if input is clicked
+  const value = event.target.checked;
+
+  //get size from name attr 
+  const key = event.target.name;
+
+
+  //when nothing's been selected
+  if (madeSelection == false){
+    //make copy of old state
+    newState = {...state}
+
+    //update state
+    newState[key] = value;
+    newState.madeSelection = true;
+    newState.errorMessage = null;
+
+    setStateCallback(newState, () => actionCallback(key));
+  }
+
+  if (madeSelection) {
+
+    //if you try to make more than one selection
+    if (state[key] == false) {
+
+      //make copy of old state
+      newState = {...state};
+
+      //update state
+      newState.errorMessage = `Unclick the last selection to select a new ${inputNameType}.`;
+
+      setStateCallback(newState);
+
+    } else {
+      //make copy of old state
+      newState = {...state}
+
+      //update state
+      newState[key] = value;
+      newState.madeSelection = false;
+      newState.errorMessage = null;
+
+      
+      setStateCallback(newState, () => actionCallback('')); 
+    }
+  }
 
 }

@@ -11,6 +11,7 @@ class SelectToppings extends Component {
       "Whipped Cream": false,
       "Cinnamon": false,
       "Caramel Syrup": false,
+      "No Toppings": false,
       "Quantity": "0",
       "currentSelection": '',
       "madeSelection": false,
@@ -146,7 +147,7 @@ class SelectToppings extends Component {
 
 
   render(){
-    const ToppingsArray = ["Whipped Cream", "Cinnamon", "Caramel Syrup"];
+    const ToppingsArray = ["Whipped Cream", "Cinnamon", "Caramel Syrup", "No Toppings"];
     const {Quantity} = this.state;
     const {goBackTo} = this.props;
     return (

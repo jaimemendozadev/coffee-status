@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectSize} from '../../actions/CustomDrink.js';
 import {renderSelectMilk} from '../../actions/CustomDrink.js';
+import {renderInputFields} from '../utils.jsx';
+import {handleInputChange} from '../utils.jsx';
+import {renderErrorMessage} from '../utils.jsx';
 
 class SelectSize extends Component {
   constructor(props){
@@ -17,19 +20,11 @@ class SelectSize extends Component {
       "errorMessage": ''
     }
     
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
     this.renderMilkButton = this.renderMilkButton.bind(this);
-    this.renderInputFields = this.renderInputFields.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+    this.handleInputChange = handleInputChange.bind(this);
+    this.renderInputFields = renderInputFields.bind(this);
 
-  renderErrorMessage(){
-    if (this.state.errorMessage){
-      return <div>{this.state.errorMessage}</div>
-    }
   }
-
-  
 
   renderMilkButton(){
     const {renderSelectMilk} = this.props;
@@ -38,88 +33,23 @@ class SelectSize extends Component {
      return <button onClick={() => renderSelectMilk()}>Select Type of Milk</button>;
     }
   }
-  
-
-  renderInputFields(SizesArray){
-    return SizesArray.map((size, idx) => {
-      return (
-        <label key={`${size + idx}`}>{size}
-          <input
-            type="checkbox"
-            name={size}
-            checked={this.state[size]}
-            onClick={(event) => this.handleInputChange(event)} />
-        </label> 
-      )
-    });  
-  }
-
-
-  handleInputChange(event) {
-    const {madeSelection} = this.state;
-    const {selectSize} = this.props;
-    
-    let newState;
-
-    //value is boolean that checks if input is clicked
-    const value = event.target.checked;
-
-    //get size from name attr 
-    const size = event.target.name;
-
-
-    //when nothing's been selected
-    if (madeSelection == false){
-      //make copy of old state
-      newState = {...this.state}
-
-      //update state
-      newState[size] = value;
-      newState.madeSelection = true;
-      newState.errorMessage = null;
-      this.setState(newState, () => selectSize(size));
-    }
-
-
-    if (madeSelection) {
-
-      //if you try to make more than one selection
-      if (this.state[size] == false) {
-
-        //make copy of old state
-        newState = {...this.state};
-
-        //update state
-        newState.errorMessage = "Unclick the last selection to select a new size.";
-    
-        this.setState(newState);
-
-      } else {
-        //make copy of old state
-        newState = {...this.state}
-
-        //update state
-        newState[size] = value;
-        newState.madeSelection = false;
-        newState.errorMessage = null;
-        this.setState(newState, () => selectSize('')); 
-      }
-    }
-  }
 
   render(){
     const Sizes = ["Short", "Small", "Medium", "Large", "X-Large"];
-    const {goBackTo} = this.props;
+    const {goBackTo, selectSize} = this.props;
 
     return (
       <form>
         <h1>Pick a Size for Your Drink</h1>
+
         <fieldset>
+
           <legend>Size</legend>
-            {this.renderInputFields(Sizes)}
+            {this.renderInputFields(Sizes, this.state, this.setState.bind(this), this.handleInputChange, selectSize, "size")}
+        
         </fieldset>  
     
-        {this.renderErrorMessage()}
+        {renderErrorMessage(this.state)}
         
         <div>
           <button onClick={() => goBackTo('selectType')}>Go Back and Make a Selection</button>

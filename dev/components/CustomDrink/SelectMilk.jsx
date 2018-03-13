@@ -15,6 +15,7 @@ class SelectMilk extends Component {
       "Coconut Milk": false,
       "Almond Milk": false,
       "Soy Milk": false,
+      "No Milk": false,
       "madeSelection": false,
       "errorMessage": ''
     }
@@ -70,6 +71,8 @@ class SelectMilk extends Component {
     //get milk type from name attr 
     const MilkType = event.target.name;
 
+    console.log("when no selection made, milktype is ", MilkType)
+
 
     //when nothing's been selected
     if (madeSelection == false){
@@ -115,7 +118,7 @@ class SelectMilk extends Component {
 
 
   render(){
-    const MilkTypes = ["Low Fat Milk", "2% Milk", "Whole Milk", "Coconut Milk", "Almond Milk", "Soy Milk"];
+    const MilkTypes = ["Low Fat Milk", "2% Milk", "Whole Milk", "Coconut Milk", "Almond Milk", "Soy Milk", "No Milk"];
     const {goBackTo} = this.props;
 
     return (
