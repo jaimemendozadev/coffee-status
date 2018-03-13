@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectSweetness} from '../../actions/CustomDrink.js';
 import {renderSelectToppings} from '../../actions/CustomDrink.js';
+import {renderErrorMessage} from '../utils.jsx';
 
 class SelectSweetness extends Component {
   constructor(props){
@@ -22,23 +23,13 @@ class SelectSweetness extends Component {
       "errorMessage": ''
     }
 
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
+    
     this.renderToppingsButton = this.renderToppingsButton.bind(this);
     this.renderInputFields = this.renderInputFields.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
   }
-
-  
-
-  renderErrorMessage(){
-    if (this.state.errorMessage){
-      return <div>{this.state.errorMessage}</div>
-    }
-  }
-
-  
 
   renderToppingsButton(){
     const {renderSelectToppings} = this.props;
@@ -170,7 +161,7 @@ class SelectSweetness extends Component {
             </label> 
         </fieldset>  
     
-        {this.renderErrorMessage()}
+        {renderErrorMessage(this.state)}
 
         <div>
           <button onClick={() => goBackTo('toggleMilk')}>Go Back and Change the Milk Type</button>

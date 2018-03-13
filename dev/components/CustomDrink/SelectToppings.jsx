@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectToppings} from '../../actions/CustomDrink.js';
 import {renderConfirmation} from '../../actions/CustomDrink.js';
+import {renderErrorMessage} from '../utils.jsx';
 
 class SelectToppings extends Component {
   constructor(props){
@@ -18,23 +19,13 @@ class SelectToppings extends Component {
       "errorMessage": ''
     }
 
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
+    
     this.renderConfirmationButton = this.renderConfirmationButton.bind(this);
     this.renderInputFields = this.renderInputFields.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
   }
-
-  
-
-  renderErrorMessage(){
-    if (this.state.errorMessage){
-      return <div>{this.state.errorMessage}</div>
-    }
-  }
-
-  
 
   renderConfirmationButton(){
     const {renderConfirmation} = this.props;
@@ -165,7 +156,7 @@ class SelectToppings extends Component {
             </label> 
         </fieldset>  
     
-        {this.renderErrorMessage()}
+        {renderErrorMessage(this.state)}
 
         <div>
           <button onClick={() => goBackTo('toggleSweet')}>Go Back and Change the Sweetness Level</button>
