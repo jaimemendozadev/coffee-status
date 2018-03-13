@@ -109,7 +109,7 @@ export const handleInputChange = (event, state, setStateCallback, actionCallback
       newState = {...state};
 
       //update state
-      newState.errorMessage = `Unclick the last selection to select a new ${inputNameType}.`;
+      newState.errorMessage = `Unclick the last selection to change the ${inputNameType}.`;
 
       setStateCallback(newState);
 

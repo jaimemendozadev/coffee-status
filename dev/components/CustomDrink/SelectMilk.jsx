@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {selectMilk} from '../../actions/CustomDrink.js';
+import {renderInputFields} from '../utils.jsx';
+import {handleInputChange} from '../utils.jsx';
+import {renderErrorMessage} from '../utils.jsx';
 import {renderSelectSweetness} from '../../actions/CustomDrink.js';
 
 
@@ -20,20 +23,9 @@ class SelectMilk extends Component {
       "errorMessage": ''
     }
 
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
     this.renderSweetButton = this.renderSweetButton.bind(this);
-    this.renderInputFields = this.renderInputFields.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-
   }
 
-  renderErrorMessage(){
-    if (this.state.errorMessage){
-      return <div>{this.state.errorMessage}</div>
-    }
-  }
-
-  
 
   renderSweetButton(){
     const {renderSelectSweetness} = this.props;
@@ -42,94 +34,21 @@ class SelectMilk extends Component {
      return <button onClick={() => renderSelectSweetness()}>Select Level of Sweetness</button>;
     }
   }
-  
-
-  renderInputFields(MilkArray){
-    return MilkArray.map((MilkType, idx) => {
-      return (
-        <label key={`${MilkType + idx}`}>{MilkType}
-          <input
-            type="checkbox"
-            name={MilkType}
-            checked={this.state[MilkType]}
-            onClick={(event) => this.handleInputChange(event)} />
-        </label> 
-      )
-    });  
-  }
-
-
-  handleInputChange(event) {
-    const {madeSelection} = this.state;
-    const {selectMilk} = this.props;
-    
-    let newState;
-
-    //value is boolean that checks if input is clicked
-    const value = event.target.checked;
-
-    //get milk type from name attr 
-    const MilkType = event.target.name;
-
-    console.log("when no selection made, milktype is ", MilkType)
-
-
-    //when nothing's been selected
-    if (madeSelection == false){
-      //make copy of old state
-      newState = {...this.state}
-
-      //update state
-      newState[MilkType] = value;
-      newState.madeSelection = true;
-      newState.errorMessage = null;
-      this.setState(newState, () => selectMilk(MilkType));
-    }
-
-    //Note: might want to give customers option of choosing 
-    //more than one type of milk
-
-    if (madeSelection) {
-
-      //if you try to make more than one selection
-      if (this.state[MilkType] == false) {
-
-        //make copy of old state
-        newState = {...this.state};
-
-        //update state
-        newState.errorMessage = "Unclick the last selection to select a new milk option.";
-    
-        this.setState(newState);
-
-      } else {
-        //make copy of old state
-        newState = {...this.state}
-
-        //update state
-        newState[MilkType] = value;
-        newState.madeSelection = false;
-        newState.errorMessage = null;
-        this.setState(newState, () => selectMilk('')); 
-      }
-    }
-  }
-
-
 
   render(){
     const MilkTypes = ["Low Fat Milk", "2% Milk", "Whole Milk", "Coconut Milk", "Almond Milk", "Soy Milk", "No Milk"];
-    const {goBackTo} = this.props;
+    const {goBackTo, selectMilk} = this.props;
 
     return (
       <form>
         <h1>Select the Type of Milk for Your Drink</h1>
         <fieldset>
           <legend>Milk</legend>
-            {this.renderInputFields(MilkTypes)}
+            {renderInputFields(MilkTypes, this.state, this.setState.bind(this), handleInputChange, selectMilk, "milk")}
+      
         </fieldset>  
     
-        {this.renderErrorMessage()}
+        {renderErrorMessage(this.state)}
 
         <div>
           <button onClick={() => goBackTo('toggleSize')}>Go Back and Change the Size</button>
