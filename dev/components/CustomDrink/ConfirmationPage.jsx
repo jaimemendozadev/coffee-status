@@ -44,8 +44,8 @@ class ConfirmationPage extends Component {
   }
 
   render() {
-    const {CustomDrink} = this.props;
-    console.log("CustomDrink props ", CustomDrink)
+    const {CustomDrink, goBackTo} = this.props;
+    
     return (
       <div>
         

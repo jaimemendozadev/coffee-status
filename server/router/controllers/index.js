@@ -4,6 +4,9 @@ const authToken = process.env.AUTHTOKEN;
 
 //require the Twilio module and create a REST client
 const client = require('twilio')(accountSid, authToken);
+const DB_API = process.env.DB_API;
+const axios = require('axios');
+
 
 const makeACall = (req, res) => {
 
@@ -22,11 +25,16 @@ const makeACall = (req, res) => {
 }
 
 
-const createCustomDrink = (req, res) => {
-  console.log('hit createACustomDrink ', req.body);
-  res.send('hit createACustomDrink');
+const createCustomDrink = async (req, res) => {
+  
+  let payload = req.body;
+ 
+  let DBResult = await axios.post(`${DB_API}/customdrink`, payload)
+    .then(result => result.data);
+  
+  res.send(DBResult);
+  
 }
-
 
 
 
