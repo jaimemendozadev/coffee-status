@@ -35,8 +35,10 @@ class ConfirmationPage extends Component {
   
       fetch(API, API_OPTIONS)
         .then(results => {
-          let serverResults = results.json();
-          console.log("serverResults are ", serverResults);
+          return results.json();
+        })
+        .then(serverResults => {
+          console.log("serverResults are ", serverResults)
         })
         .catch(error => {
           console.log("the error from the server ", error);
