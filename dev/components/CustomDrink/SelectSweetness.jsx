@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {goBackTo} from '../../actions/CustomDrink.js';
-import {selectSweetness} from '../../actions/CustomDrink.js';
-import {renderSelectToppings} from '../../actions/CustomDrink.js';
 import {handleSubmit, renderErrorMessage} from '../utils.jsx';
+import {goBackTo, selectSweetness, renderSelectToppings} from '../../actions/CustomDrink.js';
 
 class SelectSweetness extends Component {
   constructor(props){
@@ -159,7 +157,7 @@ class SelectSweetness extends Component {
   render(){
     const SweetArray = ["Equal", "Sugar in the Raw", "Stevia", "Honey", "Splenda", "Sugar", "Sweet 'n Low", "No Sweetness"];
     const {Quantity} = this.state;
-    const {goBackTo} = this.props;
+    const {goBackTo, arrive_at_confirmation} = this.props;
 
     return (
       <form>
@@ -179,7 +177,11 @@ class SelectSweetness extends Component {
         {renderErrorMessage(this.state)}
 
         <div>
+
+          {arrive_at_confirmation ? <button onClick={(event) => handleSubmit(event, goBackTo, 'confirmationPage')}>Go Back to Confirm Saved Changes</button> : null}
+
           <button onClick={(event) => handleSubmit(event, goBackTo, 'toggleMilk')}>Go Back and Change the Milk Type</button>
+          
           {this.renderToppingsButton()} 
         </div>
       </form>
@@ -187,9 +189,10 @@ class SelectSweetness extends Component {
   }
 }
 
-function mapStateToProps({CustomDrink: { selected_sweetness }}){
+function mapStateToProps({CustomDrink: { selected_sweetness, arrive_at_confirmation }}){
   return {
-    selected_sweetness
+    selected_sweetness,
+    arrive_at_confirmation
   }
 }
 

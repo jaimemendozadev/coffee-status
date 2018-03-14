@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {selectType} from '../../actions/CustomDrink.js';
-import {renderSelectSize} from '../../actions/CustomDrink.js';
-import {goBackTo} from '../../actions/CustomDrink.js';
 import {renderPage, handleSubmit} from '../utils.jsx';
+import {renderSelectSize, goBackTo, selectType} from '../../actions/CustomDrink.js';
+
 
 class SelectType extends Component {
   constructor(props){
@@ -130,7 +129,7 @@ class SelectType extends Component {
     
     const HotCoffee = ["Coffee", "Latte", "Americano", "Espresso", "Cappuccino", "Flat White", "Macchiato", "Mocha", "Frappuchino"];
 
-    const {goBackTo} = this.props;
+    const {goBackTo, arrive_at_confirmation} = this.props;
 
     return (
       <form>
@@ -148,7 +147,10 @@ class SelectType extends Component {
         {this.renderErrorMessage()}
         
         <div>
+          {arrive_at_confirmation ? <button onClick={(event) => handleSubmit(event, goBackTo, 'confirmationPage')}>Go Back to Confirm Saved Changes</button> : null}
+
           <button onClick={(event) => handleSubmit(event, goBackTo, 'selectionPage')}>Go Back and Pick a Different Type</button>
+          
           {this.renderSelectSizeButton()}
         </div>
        
@@ -156,7 +158,12 @@ class SelectType extends Component {
     )
   }
 }
-  
+
+function mapStateToProps({CustomDrink: {arrive_at_confirmation}}){
+  return {
+    arrive_at_confirmation
+  }
+}
 
 
-export default connect(null, {selectType, renderSelectSize, goBackTo})(SelectType);
+export default connect(mapStateToProps, {selectType, renderSelectSize, goBackTo})(SelectType);

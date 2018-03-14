@@ -35,7 +35,7 @@ class SelectMilk extends Component {
 
   render(){
     const MilkTypes = ["Low Fat Milk", "2% Milk", "Whole Milk", "Coconut Milk", "Almond Milk", "Soy Milk", "No Milk"];
-    const {goBackTo, selectMilk} = this.props;
+    const {goBackTo, selectMilk, arrive_at_confirmation} = this.props;
 
     return (
       <form>
@@ -49,6 +49,8 @@ class SelectMilk extends Component {
         {renderErrorMessage(this.state)}
 
         <div>
+          {arrive_at_confirmation ? <button onClick={(event) => handleSubmit(event, goBackTo, 'confirmationPage')}>Go Back to Confirm Saved Changes</button> : null}
+
           <button onClick={(event) => handleSubmit(event, goBackTo, 'toggleSize')}>Go Back and Change the Size</button>
           {this.renderSweetButton()}
         </div>
@@ -59,4 +61,10 @@ class SelectMilk extends Component {
   }
 }
 
-export default connect(null, {selectMilk, renderSelectSweetness, goBackTo})(SelectMilk);
+function mapStateToProps({CustomDrink: {arrive_at_confirmation}}){
+  return {
+    arrive_at_confirmation
+  }
+}
+
+export default connect(mapStateToProps, {selectMilk, renderSelectSweetness, goBackTo })(SelectMilk);

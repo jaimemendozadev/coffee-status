@@ -28,11 +28,18 @@ const makeACall = (req, res) => {
 const createCustomDrink = async (req, res) => {
   
   let payload = req.body;
- 
-  let DBResult = await axios.post(`${DB_API}/customdrink`, payload)
+
+  try {
+    let DBResult = await axios.post(`${DB_API}/customdrink`, payload)
     .then(result => result.data);
   
-  res.send(DBResult);
+    res.send(DBResult);
+
+  } catch(error){
+    res.send({error: 'There was an error saving the data in the database.'})
+  }
+ 
+  
   
 }
 

@@ -33,12 +33,16 @@ class ConfirmationPage extends Component {
         body: JSON.stringify(payload)
       };
   
-      fetch(API, API_OPTIONS).then(result => {
-        console.log("the result from the server ", result);
-      })
-      .catch(error => {
-        console.log("got an error from server ", error)  
-      });
+      fetch(API, API_OPTIONS)
+        .then(results => {
+          let serverResults = results.json();
+          console.log("serverResults are ", serverResults);
+        })
+        .catch(error => {
+          console.log("the error from the server ", error);
+        });
+
+    
 
     }
   }
@@ -56,7 +60,7 @@ class ConfirmationPage extends Component {
           <li onClick={() => goBackTo('toggleSize')}><a href="#">Pick a New Size</a></li>
           <li onClick={() => goBackTo('toggleMilk')}><a href="#">Choose a Different Milk Type</a></li>
           <li onClick={() => goBackTo('toggleSweet')}><a href="#">Adjust the Sweetness   Type &amp; Quantity</a></li>
-          <li onClick={() => goBackTo('toggleToppings')}><a href="#">Pick Different Kind of Topings</a></li>
+          <li onClick={() => goBackTo('toggleToppings')}><a href="#">Pick Different Kind of Toppings</a></li>
         </ul>
         <form onSubmit={this.placeOrder(CustomDrink)}>
           <button>Place Your Custom Order</button>
