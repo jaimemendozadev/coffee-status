@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import {createStore, applyMiddleware} from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+// import {PrivateRoute} from './components/Router/index.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 
@@ -16,6 +17,7 @@ ReactDOM.render(
     <Switch>
       <Route path='/customdrink' component={CustomDrink} />
       <Route path='/' component={App} />
+      {/* <PrivateRoute path='/' component={App} /> */}
     </Switch>
   </BrowserRouter>
 </Provider>, document.querySelector('.container'));

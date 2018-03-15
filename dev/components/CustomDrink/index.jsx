@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 const CustomDrink = ({current_page}) => (
   <div>
+    <h1>Create Your Custom Drink</h1>
     <DisplaySelection />
 
     {renderPage(current_page)}
