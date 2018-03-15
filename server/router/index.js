@@ -5,6 +5,8 @@ Router.get('/', (req, res) => {
   res.send('Hit the API!');
 });
 
+Router.post('/login')
+
 Router.post('/customdrink', createCustomDrink);
 
 Router.post('/order', placeAnOrder);

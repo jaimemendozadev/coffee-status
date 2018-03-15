@@ -75,11 +75,11 @@
 /*!***************************************!*\
   !*** ./dev/actions/Authentication.js ***!
   \***************************************/
-/*! exports provided: AUTHENTICATED, NOT_UNAUTHENTICATED */
+/*! exports provided: AUTHENTICATED, NOT_UNAUTHENTICATED, googleLogin */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AUTHENTICATED\", function() { return AUTHENTICATED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"NOT_UNAUTHENTICATED\", function() { return NOT_UNAUTHENTICATED; });\nconst AUTHENTICATED = 'AUTHENTICATED';\nconst NOT_UNAUTHENTICATED = 'NOT_UNAUTHENTICATED';\n\n//# sourceURL=webpack:///./dev/actions/Authentication.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AUTHENTICATED\", function() { return AUTHENTICATED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"NOT_UNAUTHENTICATED\", function() { return NOT_UNAUTHENTICATED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"googleLogin\", function() { return googleLogin; });\nconst API = 'http://localhost:7000';\n\nconst AUTHENTICATED = 'AUTHENTICATED';\nconst NOT_UNAUTHENTICATED = 'NOT_UNAUTHENTICATED';\n\n\nconst googleLogin = () => {\n    let API_OPTIONS = {\n      method: 'POST',\n      headers : new Headers({'Content-Type': 'application/json'})    \n    };\n  \n      fetch(API, API_OPTIONS)\n        .then(results => {\n          return results.json();\n        })\n        .then(serverResults => {\n          console.log(\"serverResults are \", serverResults)\n        })\n        .catch(error => {\n          console.log(\"the error from the server \", error);\n        });\n}\n\n//# sourceURL=webpack:///./dev/actions/Authentication.js?");
 
 /***/ }),
 
@@ -215,6 +215,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
+/***/ "./dev/components/Login.jsx":
+/*!**********************************!*\
+  !*** ./dev/components/Login.jsx ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _Authentication = __webpack_require__(/*! ../actions/Authentication.js */ \"./dev/actions/Authentication.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login(_ref) {\n  var googleLogin = _ref.googleLogin;\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      'h1',\n      null,\n      'Login'\n    ),\n    _react2.default.createElement(\n      'button',\n      { onClick: googleLogin, 'class': 'loginBtn loginBtn--google' },\n      'Login with Google'\n    )\n  );\n};\n\nexports.default = (0, _reactRedux.connect)(null, { googleLogin: _Authentication.googleLogin })(Login);\n\n//# sourceURL=webpack:///./dev/components/Login.jsx?");
+
+/***/ }),
+
 /***/ "./dev/components/utils.jsx":
 /*!**********************************!*\
   !*** ./dev/components/utils.jsx ***!
@@ -235,7 +247,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _App = __webpack_require__(/*! ./components/App.jsx */ \"./dev/components/App.jsx\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nvar _index = __webpack_require__(/*! ./components/CustomDrink/index.jsx */ \"./dev/components/CustomDrink/index.jsx\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _reducers = __webpack_require__(/*! ./reducers */ \"./dev/reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/lib/index.js\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/index.js\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/es/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// import {PrivateRoute} from './components/Router/index.jsx';\n\nvar createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);\n\n_reactDom2.default.render(_react2.default.createElement(\n  _reactRedux.Provider,\n  { store: createStoreWithMiddleware(_reducers2.default) },\n  _react2.default.createElement(\n    _reactRouterDom.BrowserRouter,\n    null,\n    _react2.default.createElement(\n      _reactRouterDom.Switch,\n      null,\n      _react2.default.createElement(_reactRouterDom.Route, { path: '/customdrink', component: _index2.default }),\n      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _App2.default })\n    )\n  )\n), document.querySelector('.container'));\n\n//# sourceURL=webpack:///./dev/index.jsx?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _App = __webpack_require__(/*! ./components/App.jsx */ \"./dev/components/App.jsx\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nvar _Login = __webpack_require__(/*! ./components/Login.jsx */ \"./dev/components/Login.jsx\");\n\nvar _Login2 = _interopRequireDefault(_Login);\n\nvar _index = __webpack_require__(/*! ./components/CustomDrink/index.jsx */ \"./dev/components/CustomDrink/index.jsx\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _reducers = __webpack_require__(/*! ./reducers */ \"./dev/reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/lib/index.js\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/index.js\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/es/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// import {PrivateRoute} from './components/Router/index.jsx';\n\nvar createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);\n\n_reactDom2.default.render(_react2.default.createElement(\n  _reactRedux.Provider,\n  { store: createStoreWithMiddleware(_reducers2.default) },\n  _react2.default.createElement(\n    _reactRouterDom.BrowserRouter,\n    null,\n    _react2.default.createElement(\n      _reactRouterDom.Switch,\n      null,\n      _react2.default.createElement(_reactRouterDom.Route, { path: '/customdrink', component: _index2.default }),\n      _react2.default.createElement(_reactRouterDom.Route, { path: '/login', component: _Login2.default }),\n      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _App2.default })\n    )\n  )\n), document.querySelector('.container'));\n\n//# sourceURL=webpack:///./dev/index.jsx?");
 
 /***/ }),
 

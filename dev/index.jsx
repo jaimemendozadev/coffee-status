@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
+import Login from './components/Login.jsx';
 import CustomDrink from './components/CustomDrink/index.jsx';
 import rootReducer from './reducers';
 import {Provider} from 'react-redux';
@@ -16,6 +17,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path='/customdrink' component={CustomDrink} />
+      <Route path='/login' component={Login} />
       <Route path='/' component={App} />
       {/* <PrivateRoute path='/' component={App} /> */}
     </Switch>
