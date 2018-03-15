@@ -10,7 +10,6 @@ class App extends Component {
         <div>
           <h1>CoffeeStatus: Create a Custom Drink</h1>
         </div>
-        <CustomDrink />
       </div>
     )
   }

@@ -1,34 +1,12 @@
 const Router = require('express').Router();
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const {makeACall, createCustomDrink} = require('./controllers');
+const {placeAnOrder, createCustomDrink} = require('./controllers');
 
 Router.get('/', (req, res) => {
-  res.send('hit the api bruh');
+  res.send('Hit the API!');
 });
-
-Router.post('/orderresponse', makeACall);
 
 Router.post('/customdrink', createCustomDrink);
 
-
-Router.post('/order', (req, res) => {
- 
-  // Start our TwiML response.
-  const twiml = new MessagingResponse();
-
-  console.log("twiml ", twiml);
- 
-  // Add a text message.
-  const msg = twiml.message('Check out this dancing hot coffee!');
- 
-  // Add a picture message.
-  msg.media('https://i.pinimg.com/originals/8c/6c/55/8c6c55cd70c5dc9bac7860b8d89c386c.gif');
-
-  console.log("msg ", msg);
- 
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twiml.toString());
-});
-
+Router.post('/order', placeAnOrder);
 
 module.exports = Router;
