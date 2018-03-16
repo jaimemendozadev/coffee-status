@@ -8,16 +8,19 @@ passport.use(new GoogleStrategy({
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/api/auth/google/callback"
   },
-  (accessToken, refreshToken, profile, cb) => {
-    console.log("accessToken ", accessToken);
-    console.log("\n");
-
-    console.log("refreshToken ", refreshToken);
-    console.log("\n");
-
-    console.log("profile ", profile);
-    console.log("\n");
+  async(accessToken, refreshToken, profile, cb) => {
     
+    //send payload to DB API
+    //if the user is not found, create the user in DB
+    let googleUser = {
+      social_id: profile.id, 
+      first_name: profile.name.givenName, 
+      last_name: profile.name.familyName,
+      email: profile.emails.value,
+      profile_image_url: photos[0].value
+    }
+
+
 
   }
 ));

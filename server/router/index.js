@@ -5,7 +5,7 @@ const {placeAnOrder, createCustomDrink} = require('./controllers');
 
 
 Router.get('/auth/google', 
-  passport.authenticate('google', { scope: ['profile'] })
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 
