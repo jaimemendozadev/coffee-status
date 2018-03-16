@@ -1,15 +1,18 @@
+const passportConfig = require('../services/Passport.js')
 const passport = require('passport');
 const Router = require('express').Router();
 const {placeAnOrder, createCustomDrink} = require('./controllers');
 
-Router.get('/', (req, res) => {
-  res.send('Hit the API!');
+
+Router.get('/auth/google', 
+  passport.authenticate('google', { scope: ['profile'] })
+);
+
+
+Router.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
+  console.log("req is ", req)
+  console.log("res ", res);
 });
-
-Router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-
-Router.get('/auth/google/callback', passport.authenticate('google'), )
 
 Router.post('/customdrink', createCustomDrink);
 
