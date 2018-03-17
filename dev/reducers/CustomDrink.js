@@ -20,7 +20,8 @@ const defaultDrinkState = {
   selected_milk: '',
   selected_sweetness: [],
   selected_topings: [],
-  arrive_at_confirmation: false,  
+  arrive_at_confirmation: false,
+  server: {error: false, message: ''}  
 }
 
 
