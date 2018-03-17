@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
-/*
-export const PrivateRoute = ({component: Component, ...rest}) => (
+import {Route, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+
+const PrivateRoute = ({component: Component, ...rest}) => (
   <Route {...rest} render={(props) => (
-    ifAuthenticated === true ?
+    props.isAuthenticated === true ?
       <Component {...props} /> :
-      <Redirect to={{
-        pathname: '/login',
-        state: {from: props.location}
-      }} />  
+      <Redirect to='/login' />  
   )}/>
-)
-*/
+);
+
+function mapStateToProps({Authentication: {isAuthenticated}}){
+  return {
+    isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, null)(PrivateRoute);
+
 
 /*
 Link: https://tylermcginnis.com/react-router-protected-routes-authentication/

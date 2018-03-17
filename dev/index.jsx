@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import {AUTHENTICATED} from './actions/Authentication.js';
+import {NOT_UNAUTHENTICATED} from './actions/Authentication.js';
 import HomePage from './components/HomePage.jsx';
 import Login from './components/Login.jsx';
 import CustomDrink from './components/CustomDrink/index.jsx';
@@ -8,18 +10,27 @@ import {Provider} from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import {createStore, applyMiddleware} from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import {PrivateRoute} from './components/Router/index.jsx';
+import PrivateRoute from './components/Router/index.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
+const store = createStoreWithMiddleware(rootReducer);
+const token = localStorage.getItem('token');
+
+if(token) {
+  store.dispatch({type: AUTHENTICATED});
+} else {
+  store.dispatch({type: NOT_UNAUTHENTICATED});
+}
+
+
 
 ReactDOM.render(
-<Provider store={createStoreWithMiddleware(rootReducer)}>
+<Provider store={store}>
   <BrowserRouter>
     <Switch>
-      <Route path='/customdrink' component={CustomDrink} />
+      <PrivateRoute path='/customdrink' component={CustomDrink} />
       <Route path='/login' component={Login} />
-      <Route path='/' component={HomePage} />
-      {/* <PrivateRoute path='/' component={App} /> */}
+      <PrivateRoute path='/' component={HomePage} />
     </Switch>
   </BrowserRouter>
 </Provider>, document.querySelector('.container'));
