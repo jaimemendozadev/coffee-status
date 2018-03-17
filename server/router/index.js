@@ -27,7 +27,7 @@ Router.get('/auth/google/callback', passport.authenticate('google', {session: fa
   console.log("tokenForUser is ", generatedToken);
 
   //redirect to login
-  res.redirect("/login?token=" + generatedToken);
+  res.redirect(`/login?token=${generatedToken}`);
 
 });
 

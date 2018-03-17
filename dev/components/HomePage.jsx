@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div>
         <div>
-          <h1>CoffeeStatus: Create a Custom Drink</h1>
+          <h1>Welcome to CoffeeStatus: Create a Custom Drink</h1>
           
         </div>
       </div>
