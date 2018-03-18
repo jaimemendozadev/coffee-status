@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import CustomDrink from './CustomDrink/index.jsx';
 import styles from '../main.scss';
-class App extends Component {
+
+class HomePage extends Component {
 
   render() {
     console.log("this.props inside App ", this.props)
@@ -16,4 +17,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default HomePage;

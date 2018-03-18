@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {AUTHENTICATED} from './actions/Authentication.js';
-import {NOT_UNAUTHENTICATED} from './actions/Authentication.js';
+import {NOT_AUTHENTICATED} from './actions/Authentication.js';
 import HomePage from './components/HomePage.jsx';
+import LandingPage from './components/LandingPage.jsx';
 import Login from './components/Login.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
 import CustomDrink from './components/CustomDrink/index.jsx';
 import rootReducer from './reducers';
 import {Provider} from 'react-redux';
@@ -19,7 +21,7 @@ const token = localStorage.getItem('token');
 if(token) {
   store.dispatch({type: AUTHENTICATED});
 } else {
-  store.dispatch({type: NOT_UNAUTHENTICATED});
+  store.dispatch({type: NOT_AUTHENTICATED});
 }
 
 
@@ -28,9 +30,11 @@ ReactDOM.render(
 <Provider store={store}>
   <BrowserRouter>
     <Switch>
+      <PrivateRoute path='/homepage' component={HomePage} />
       <PrivateRoute path='/customdrink' component={CustomDrink} />
       <Route path='/login' component={Login} />
-      <PrivateRoute path='/' component={HomePage} />
+      <Route path='/errorpage' component={ErrorPage} />
+      <Route path='/' component={LandingPage} />
     </Switch>
   </BrowserRouter>
 </Provider>, document.querySelector('.container'));

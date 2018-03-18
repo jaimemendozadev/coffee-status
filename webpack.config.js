@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js?x$/, exclude: /node_modules/, loader: 'babel-loader' },
-      
+      { test: /\.(svg|png|jpe?g)$/, loader: 'file-loader'},
       { test: /\.scss$/, use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: ['css-loader', 'sass-loader']
