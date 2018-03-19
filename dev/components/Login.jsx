@@ -7,9 +7,6 @@ class Login extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      tokenSet: false
-    }
     this.homepageRedirect = this.homepageRedirect.bind(this);
   }
 
@@ -23,7 +20,6 @@ class Login extends Component {
     const {authSuccess, authCompleted, authFailure, isAuthenticated} = this.props;
     const {search} = this.props.location;
 
-    const{setToken} = this.state;
     const {push} = this.props.history;
 
     //on CWM, if we get the token, save in localStorage and fire action creator
@@ -41,11 +37,6 @@ class Login extends Component {
         console.log("authSuccessResult ", authSuccessResult);
         return authCompleted();
       })
-      .then(authCompletedResult => {
-        this.setState({
-          tokenSet: true
-        });
-      })
       .catch(error => {
         console.log("Error inside authPromise ", error);
       })
@@ -54,7 +45,16 @@ class Login extends Component {
    
     
   }
-  
+
+  componentWillReceiveProps(nextProps){
+    const {isAuthenticated} = nextProps;
+    
+
+    if(isAuthenticated){
+      this.homepageRedirect();
+    }
+
+  }
 
 
   render() {
@@ -62,10 +62,6 @@ class Login extends Component {
 
     if (currentlyAuthenticating == true){
       return <h1>Authentication in Progress...</h1>;
-    }
-
-    if(isAuthenticated){
-      this.homepageRedirect();
     }
 
     return (

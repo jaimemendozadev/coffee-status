@@ -4,7 +4,10 @@ import {connect} from 'react-redux';
 
 
 const ErrorPage = ({isAuthenticated}) => (
+  <div>
   <h1>Whoops! There was an error with the app, try again later. <pre>¯\_(ツ)_/¯</pre></h1>
+  <Link to='/homepage' />
+  </div>
 );
 
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {AUTHENTICATED} from './actions/Authentication.js';
+import {AUTH_SUCCESS} from './actions/Authentication.js';
 import {NOT_AUTHENTICATED} from './actions/Authentication.js';
 import HomePage from './components/HomePage.jsx';
 import LandingPage from './components/LandingPage.jsx';
@@ -19,7 +19,7 @@ const store = createStoreWithMiddleware(rootReducer);
 const token = localStorage.getItem('token');
 
 if(token) {
-  store.dispatch({type: AUTHENTICATED});
+  store.dispatch({type: AUTH_SUCCESS});
 } else {
   store.dispatch({type: NOT_AUTHENTICATED});
 }
