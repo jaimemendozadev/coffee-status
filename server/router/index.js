@@ -4,6 +4,7 @@ const Router = require('express').Router();
 const {tokenForUser} = require('../utils.js');
 const {placeAnOrder, createCustomDrink, generateSendToken} = require('./controllers');
 
+console.log("placeAnOrder is ", placeAnOrder);
 
 Router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
