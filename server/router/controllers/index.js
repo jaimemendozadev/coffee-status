@@ -13,9 +13,6 @@ const TWILIO_NUM = process.env.TWILIO_PHONE_NUMBER;
 const axios = require('axios');
 
 
-
-
-
 const createCustomDrink = async (req, res) => {
   
   let payload = req.body;
@@ -25,8 +22,6 @@ const createCustomDrink = async (req, res) => {
   try {
     let DBResult = await axios.post(`${DB_API}/customdrink`, payload)
     .then(result => result.data);
-  
-    res.send({success: "We've saved your drink information! You'll receive a text message from us soon. Use this number to text us and we'll be notified to start making your order ASAP!"});
 
     //send text message to user with Coffeeshop's Twilio Number to text orders
     client.messages
@@ -37,6 +32,8 @@ const createCustomDrink = async (req, res) => {
         mediaUrl: 'http://www.example.com/cheeseburger.png',
       })
       .then(message => process.stdout.write(message.sid));
+    
+    res.send({success: "We've saved your drink information! You'll receive a text message from us soon. Use this number to text us and we'll be notified to start making your order ASAP!"});
 
     
 
@@ -63,6 +60,21 @@ const placeAnOrder = (req, res) => {
       
       res.send(message);
     });
+}
+
+
+const generateSendToken = (req, res) => {
+  //At this point, if there is an error, User gets redirected to empty page with /auth/google/callback?code url
+  
+  //expect to get user in req from Passport Google Verify CB 
+  const {user} = req;
+
+  //generate JWT
+  const generatedToken = tokenForUser(user);
+
+  //redirect to login
+  res.redirect(`/login?token=${generatedToken}`);
+
 }
 
 
@@ -97,5 +109,6 @@ Router.post('/order', (req, res) => {
 module.exports = {
   placeAnOrder,
   createCustomDrink,
+  generateSendToken,
   sendStaticAssets
 }

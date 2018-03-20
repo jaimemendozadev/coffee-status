@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {connect} from 'react-redux';
-const API = `http://localhost:3000/api/customdrink`;
+const API = `${process.env.DB_API}/customdrink`;
 
 class ConfirmationPage extends Component {
 
@@ -76,8 +76,6 @@ class ConfirmationPage extends Component {
   
 }
 
-//{ CustomDrink: {current_page, drink, type, selected_size, selected_milk, selected_sweetness, selected_topings } }
-
 function mapStateToProps({CustomDrink}){
   return { 
     CustomDrink
@@ -85,6 +83,3 @@ function mapStateToProps({CustomDrink}){
 }
 
 export default connect(mapStateToProps, {goBackTo})(ConfirmationPage);
-
-
-//'selectionPage', 'selectType', 'toggleSize', 'toggleMilk', 'toggleSweet', 'toggleToppings', 'confirmationPage'

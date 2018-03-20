@@ -36,6 +36,15 @@
 .landing-directions {
   font-size: 2em; }
 
+.custom-drink {
+  font-size: 1.5em; }
+  .custom-drink button {
+    height: 50px;
+    border-radius: 7px;
+    margin-left: 1em;
+    margin-top: .5em;
+    font-size: 20px; }
+
 .google-anchor {
   color: white; }
 

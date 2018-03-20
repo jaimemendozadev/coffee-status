@@ -4,7 +4,7 @@ import DisplaySelection from './DisplaySelection.jsx';
 import {connect} from 'react-redux';
 
 const CustomDrink = ({current_page}) => (
-  <div>
+  <div className="custom-drink">
     <h1>Create Your Custom Drink</h1>
     <DisplaySelection />
 

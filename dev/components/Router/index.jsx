@@ -16,7 +16,7 @@ class PrivateRoute extends Component {
     }
 
     if(isAuthenticated){
-      console.log("inside token isAuthenticated")
+      
       return (
         <Route {...rest} render={(props) => <Component {...props}/>} />
       )
@@ -58,8 +58,6 @@ const PrivateRoute = ({component: Component, ...rest}) => (
       <Redirect to='/errorpage' />  
   )}/>
 );
-
-
 
 */
 
