@@ -11,9 +11,7 @@ class Login extends Component {
   }
 
   homepageRedirect(){
-
     this.props.history.push('/homepage')
-
   }
 
   componentWillMount(){
@@ -34,7 +32,6 @@ class Login extends Component {
         return authSuccess(token);
       })
       .then(authSuccessResult => {
-        console.log("authSuccessResult ", authSuccessResult);
         return authCompleted();
       })
       .catch(error => {
@@ -49,7 +46,6 @@ class Login extends Component {
   componentWillReceiveProps(nextProps){
     const {isAuthenticated} = nextProps;
     
-
     if(isAuthenticated){
       this.homepageRedirect();
     }

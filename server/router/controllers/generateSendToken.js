@@ -1,3 +1,5 @@
+const {tokenForUser} = require('../../utils.js');
+
 const generateSendToken = (req, res) => {
     //At this point, if there is an error, User gets redirected to empty page with /auth/google/callback?code url
     
