@@ -7,7 +7,7 @@ export const fetchUser = () => {
 
     let API_OPTIONS = {
       method: 'GET',
-      headers : new Headers({'authorization': `${token}`})
+      headers: {'authorization': `${token}`}
     };
   
     fetch(APP_API, API_OPTIONS)

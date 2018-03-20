@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 class LandingPage extends Component {
 
   render() {
-    console.log("this.props inside App ", this.props)
+    
     return (
       <div className="container">
         <div className="landing-header">

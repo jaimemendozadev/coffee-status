@@ -3,6 +3,10 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const axios = require('axios');
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+
 const DB_API = process.env.DB_API;
 
 passport.use(new GoogleStrategy({
@@ -40,3 +44,28 @@ passport.use(new GoogleStrategy({
     }
   }
 ));
+
+
+
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.JWTSecret;
+
+passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+    console.log("inside passport JWT Strategy")
+    
+    console.log("jwt_payload is ", jwt_payload);
+
+    // User.findOne({id: jwt_payload.sub}, function(err, user) {
+    //     if (err) {
+    //         return done(err, false);
+    //     }
+    //     if (user) {
+    //         return done(null, user);
+    //     } else {
+    //         return done(null, false);
+    //         // or you could create a new account
+    //     }
+    // });
+
+}));
