@@ -1,16 +1,16 @@
 export const FETCH_USER = 'FETCH_USER';
-const API = `${process.env.DB_API}/fetchuser`;
+const APP_API = `${process.env.APP_API}/user`;
 
 export const fetchUser = () => {
   return (dispatch) => {
     const token = localStorage.getItem('token');
 
     let API_OPTIONS = {
-      method: 'POST',
+      method: 'GET',
       headers : new Headers({'authorization': `${token}`})
     };
   
-    fetch(API, API_OPTIONS)
+    fetch(APP_API, API_OPTIONS)
       .then(results => {
         return results.json();
       })

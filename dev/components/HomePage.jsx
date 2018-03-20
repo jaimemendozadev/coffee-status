@@ -26,9 +26,11 @@ class HomePage extends Component {
       return <h1>{User.server.message}</h1>
     }
   }
-  
+
   componentDidMount(){
-    // fetchUser();
+    const {fetchUser} = this.props;
+    
+    fetchUser();
   }
 
   render() {
