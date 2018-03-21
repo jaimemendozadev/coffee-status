@@ -1,4 +1,4 @@
-const passportConfig = require('../services/Passport.js')
+const passportConfig = require('../services/Passport.js');
 const passport = require('passport');
 const Router = require('express').Router();
 const {tokenForUser} = require('../utils.js');

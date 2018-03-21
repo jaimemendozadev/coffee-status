@@ -11,6 +11,19 @@ const tokenForUser = user => {
 }
 
 
+const tokenExtractor = (req) => {
+  let token = null;
+
+  token = req.headers.authorization || token;
+  
+  console.log("the token is ", token);
+  
+  return token;
+ 
+
+};
+
 module.exports = {
-  tokenForUser
+  tokenForUser,
+  tokenExtractor
 }
