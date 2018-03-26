@@ -48,22 +48,23 @@ passport.use(new GoogleStrategy({
 ));
 
 
+
+
 const opts = {
-  //jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
-  //jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  //jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
+  jwtFromRequest: tokenExtractor,
   secretOrKey
 }
 
-
-
 passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-    console.log("inside passport JWT Strategy")
-    
+  
+  //expect to get jwt_payload { sub, iat }
+  try {
     console.log("jwt_payload is ", jwt_payload);
-
-
+  } catch(error) {
+    console.log("the error inside JWT strategy ", error)
+  }
+  
 }));
 
 
+module.exports = passport;

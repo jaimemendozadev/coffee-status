@@ -8,6 +8,7 @@ const Router = require('./router');
 const {sendStaticAssets} = require('./router/controllers')
 const public = path.resolve(__dirname, '../public');
 
+
 app.use(cors());
 app.use(express.static(public));
 app.use(bodyParser.json());

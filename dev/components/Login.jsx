@@ -22,7 +22,8 @@ class Login extends Component {
 
     //on CWM, if we get the token, save in localStorage and fire action creator
     if(search.length > 0) {
-      const token = search.includes('?token=') ? search.slice(8) : {error: true};
+      
+      const token = search.includes('?token=') ? search.slice(7) : {error: true};
 
       if(token.error == true) {
         authFailure()

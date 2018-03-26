@@ -6,11 +6,8 @@ export const fetchUser = () => {
   return (dispatch) => {
     let token = localStorage.getItem('token');
 
-    console.log("the token is ", JSON.stringify(token))
-
-    axios.get(APP_API, {
-      headers: { Authorization: 'jwt ' + token }
-      //headers: { "Authorization": "bearer " + token }
+    axios.post(APP_API, {
+      token
     })
     .then(serverResults => {
         console.log("fetchUser serverResults are ", serverResults)
