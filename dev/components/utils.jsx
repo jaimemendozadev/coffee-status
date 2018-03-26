@@ -6,7 +6,7 @@ import SelectMilk from './CustomDrink/SelectMilk.jsx';
 import SelectSweetness from './CustomDrink/SelectSweetness.jsx';
 import SelectToppings from './CustomDrink/SelectToppings.jsx';
 import ConfirmationPage from './CustomDrink/ConfirmationPage.jsx';
-
+import { parse, format, AsYouType } from 'libphonenumber-js';
 
 
 
@@ -60,7 +60,14 @@ export const renderPage = currentPage => {
 * Form Functions
 *******************/
 
-export const renderErrorMessage = (state) => {
+export const validatePhoneNumber = phoneNumber => {
+  let parsedPhone = parse(phoneNumber, 'US');
+
+  return parsedPhone;
+}
+
+
+export const renderErrorMessage = state => {
   if (state.errorMessage){
     return <div>{state.errorMessage}</div>
   }

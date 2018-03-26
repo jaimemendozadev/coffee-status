@@ -20,8 +20,10 @@ class HomePage extends Component {
     if (User.fetchedUser){
       return (
         <div>
-        <Profile fetchedUser={User} />
-        <Link to='/customdrink'>Click to Create your CustomDrink!</Link>
+          <Profile fetchedUser={User} />
+          <Link to='/updateprofile'>Update Your Profile</Link>
+          <br />
+          <Link to='/customdrink'>Click to Create your CustomDrink!</Link>
         </div>
       )
     }

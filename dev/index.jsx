@@ -6,6 +6,7 @@ import HomePage from './components/HomePage.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import Login from './components/Login.jsx';
 import SignUp from './components/SignUp.jsx';
+import UpdatePhone from './components/UpdatePhone.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import CustomDrink from './components/CustomDrink/index.jsx';
 import rootReducer from './reducers';
@@ -35,6 +36,7 @@ ReactDOM.render(
       <PrivateRoute path='/customdrink' component={CustomDrink} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={SignUp} />
+      <Route path='/updateprofile' component={UpdatePhone} />
       <Route path='/errorpage' component={ErrorPage} />
       <Route path='/' component={LandingPage} />
     </Switch>
