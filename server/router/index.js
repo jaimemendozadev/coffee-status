@@ -1,12 +1,7 @@
 const passport = require('../services/Passport.js');
-//const passport = require('passport');
-
-
 const Router = require('express').Router();
 const {tokenForUser, verifyUser} = require('../utils.js');
 const {placeAnOrder, createCustomDrink, generateSendToken, getUserProfile} = require('./controllers');
-
-
 
 Router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 

@@ -1,15 +1,16 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const axios = require('axios');
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-
-const {tokenExtractor} = require('../utils.js');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const secretOrKey = process.env.JWTSecret;
 
+const {tokenExtractor} = require('../utils.js');
+
+const secretOrKey = process.env.JWTSecret;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const DB_API = process.env.DB_API;
+
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
@@ -48,20 +49,26 @@ passport.use(new GoogleStrategy({
 ));
 
 
-
-
 const opts = {
   jwtFromRequest: tokenExtractor,
   secretOrKey
 }
 
-passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+passport.use(new JwtStrategy(opts, async(jwt_payload, done) => {
   
   //expect to get jwt_payload { sub, iat }
+  const { sub } = jwt_payload;
+
   try {
-    console.log("jwt_payload is ", jwt_payload);
+
+    let fetchedUser = await axios.get(`${DB_API}/user/${sub}`).then(result => result.data);
+
+    done(null, fetchedUser);
+
   } catch(error) {
+
     console.log("the error inside JWT strategy ", error)
+    done(error, null);
   }
   
 }));

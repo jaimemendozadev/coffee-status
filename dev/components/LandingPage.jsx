@@ -12,7 +12,10 @@ class LandingPage extends Component {
         </div>
 
         <div className="landing-login">
-          <p>Please go to the Login page to use our site.</p>
+          <p>Please go to the Sign Up page to use our site.</p>
+          <Link to="/signup">Sign Up</Link>
+
+          <p>Or if you're a returning member, go to the Login page.</p>
           <Link to="/login">Login</Link>
         </div>
 

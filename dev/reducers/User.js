@@ -1,7 +1,6 @@
 import {FETCH_USER} from '../actions/FetchUser.js';
 
 const defaultState = {
-  social_id: '', 
   first_name: '', 
   last_name: '',
   email: '',

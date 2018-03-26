@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CustomDrink from './CustomDrink/index.jsx';
+import Profile from './Profile.jsx';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchUser} from '../actions/FetchUser.js';
@@ -18,7 +19,10 @@ class HomePage extends Component {
 
     if (User.fetchedUser){
       return (
+        <div>
+        <Profile fetchedUser={User} />
         <Link to='/customdrink'>Click to Create your CustomDrink!</Link>
+        </div>
       )
     }
 
