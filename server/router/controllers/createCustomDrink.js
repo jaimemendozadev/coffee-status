@@ -1,7 +1,9 @@
 const TwilioClient = require('../../services/Twilio.js');
 const axios = require('axios');
 const DB_API = process.env.DB_API;
+const {customSuccessMSG} = require('../../utils.js');
 const TWILIO_NUM = process.env.TWILIO_PHONE_NUMBER;
+const mediaUrl = 'https://i.pinimg.com/originals/8c/6c/55/8c6c55cd70c5dc9bac7860b8d89c386c.gif';
 
 
 
@@ -9,6 +11,9 @@ const createCustomDrink = async (req, res) => {
   
     const {customDrink} = req.body;
     const {social_id} = req.user;
+
+
+    console.log("the customDrink from the req.body is ", customDrink);
 
     try {
 
@@ -28,14 +33,17 @@ const createCustomDrink = async (req, res) => {
       //update user entry in DB with new customDrink
       let updatedUser = await axios.post(`${DB_API}/user/${social_id}/drink`, {custom_drink: DBResult}).then(result => result.data); 
 
+      //create custom success message for User to send via Twilio
+      const body = customSuccessMSG(customDrink);
+
   
       //send text message to user with Coffeeshop's Twilio Number to text orders
       TwilioClient.messages
         .create({
-          body: "Use this phone number to order your custom drink in advance!",
+          body,
           to: phone_number,
           from: TWILIO_NUM,
-          mediaUrl: 'http://www.example.com/cheeseburger.png',
+          mediaUrl
         })
         .then(message => process.stdout.write(message.sid));
       

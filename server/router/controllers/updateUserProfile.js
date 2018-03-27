@@ -20,9 +20,6 @@ const updateUserProfile = async(req, res) => {
     res.send({error: true, message: "There was an error updating the user."})
     
   }
-  
-
-  
 
 }
 

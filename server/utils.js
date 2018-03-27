@@ -37,8 +37,29 @@ const tokenExtractor = req => {
 
 };
 
+
+/*
+
+the customDrink from the req.body is  { drink: 'Coffee',
+  type: [ 'Iced', 'Flat White' ],
+  selected_size: 'X-Large',
+  selected_milk: 'Almond Milk',
+  selected_sweetness: [ 'Sugar in the Raw', 20 ],
+  selected_topings: [ 'Caramel Syrup', 20 ] }
+
+*/
+
+const customSuccessMSG = DrinkInfo => {
+  const {type} = DrinkInfo;
+
+  return `Congrats! Your ${type[0]} ${type[1]} has been added to your profile! Use this phone number to order your custom drink in advance and we'll have it ready in 10 minutes!`;
+
+}
+
+
 module.exports = {
   tokenForUser,
   verifyUser,
-  tokenExtractor
+  tokenExtractor,
+  customSuccessMSG
 }
