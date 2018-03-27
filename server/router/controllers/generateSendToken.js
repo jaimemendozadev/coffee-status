@@ -5,6 +5,7 @@ const generateSendToken = (req, res) => {
   
   //expect to get user in req from Passport Google Verify CB 
   const {user} = req;  
+
   //generate JWT
   const generatedToken = tokenForUser(user);  
   //redirect to login

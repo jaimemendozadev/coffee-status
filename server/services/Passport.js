@@ -24,7 +24,8 @@ passport.use(new GoogleStrategy({
       first_name: profile.name.givenName, 
       last_name: profile.name.familyName,
       email: profile.emails[0].value,
-      profile_image_url: profile.photos[0].value
+      profile_image_url: profile.photos[0].value,
+      phone_number: 'Not Registered'
     }
 
     //send payload to DB API
