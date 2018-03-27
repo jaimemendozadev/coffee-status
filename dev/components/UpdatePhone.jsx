@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {validatePhoneNumber} from './utils.jsx';
+import axios from 'axios';
+const APP_API = process.env.APP_API;
 
 class UpdatePhone extends Component {
   constructor(props){
@@ -31,7 +33,23 @@ class UpdatePhone extends Component {
         error: 'You must submit a valid phone number.'
       });
     } else {
-      console.log("the phone number to submit is ", phone_number)
+      
+      const token = localStorage.getItem('token');
+      const payload = {token, phone_number: phone_number.phone};
+      const {push} = this.props.history;
+
+      console.log("this props inside UpdatePhone ", this.props);
+
+      axios.patch(`${APP_API}/user`, payload)
+        .then(serverResult => {
+          console.log('serverResult from user patch ', serverResult);
+          push('/homepage');
+
+        })
+        .catch(error => {
+          console.log('error from user patch ', error);
+        });
+
     }
   }
 
