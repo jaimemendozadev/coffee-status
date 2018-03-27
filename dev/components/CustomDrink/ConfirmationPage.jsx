@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {goBackTo} from '../../actions/CustomDrink.js';
 import {connect} from 'react-redux';
-const API = `${process.env.DB_API}/customdrink`;
+import axios from 'axios';
+const APP_API = `${process.env.APP_API}/customdrink`;
 
 class ConfirmationPage extends Component {
 
@@ -17,35 +18,38 @@ class ConfirmationPage extends Component {
       event.preventDefault();
 
       const {current_page, drink, type, selected_size, selected_milk, selected_sweetness, selected_topings } = CustomDrink;
-
+      let token = localStorage.getItem('token');
+      /*
       const payload = {
         drink, 
         type,
         selected_size, 
         selected_milk, 
         selected_sweetness,
-        selected_topings
+        selected_topings, 
+        token
       }
+      */
 
-      let API_OPTIONS = {
-        method: 'POST',
-        headers : new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(payload)
-      };
+      const payload = {
+        token,
+        customDrink: {
+          drink, 
+          type,
+          selected_size, 
+          selected_milk, 
+          selected_sweetness,
+          selected_topings,
+        }
+      }
   
-      fetch(API, API_OPTIONS)
-        .then(results => {
-          return results.json();
-        })
+      axios.post(APP_API, payload)
         .then(serverResults => {
-          console.log("serverResults are ", serverResults)
+          console.log("serverResults from placeOrder are ", serverResults)
         })
         .catch(error => {
-          console.log("the error from the server ", error);
+          console.log("the error inside placeOrder from the server ", error);
         });
-
-    
-
     }
   }
 

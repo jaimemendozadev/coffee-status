@@ -56,6 +56,8 @@ const opts = {
 }
 
 passport.use(new JwtStrategy(opts, async(jwt_payload, done) => {
+
+  console.log("jwt_payload ", jwt_payload)
   
   //expect to get jwt_payload { sub, iat }
   const { sub } = jwt_payload;

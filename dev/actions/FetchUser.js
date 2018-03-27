@@ -20,12 +20,11 @@ export const fetchUser = () => {
           first_name: data.first_name,
           last_name: data.last_name,
           profile_image_url: data.profile_image_url,
-          email: data.email,  
+          email: data.email,
+          phone_number: data.phone_number  
         }
 
         dispatch({type: FETCH_USER, payload: userProfile});
-
-        
 
       })
       .catch(error => {

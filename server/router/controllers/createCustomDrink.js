@@ -7,19 +7,33 @@ const TWILIO_NUM = process.env.TWILIO_PHONE_NUMBER;
 
 const createCustomDrink = async (req, res) => {
   
-    let payload = req.body;
-    let customerPhoneNumber; //get phone number from DB
-  
-  
+    const {customDrink} = req.body;
+    const {social_id} = req.user;
+
     try {
-      let DBResult = await axios.post(`${DB_API}/customdrink`, payload)
+
+      //get user phone_number & _id from DB
+      let fetchedUser = await axios.get(`${DB_API}/user/${social_id}`).then(result => result.data);
+      
+      const {_id, phone_number} = fetchedUser;
+      
+
+      //update customDrink with user._id reference and save in DB
+      customDrink.created_by = _id;
+
+      
+      let DBResult = await axios.post(`${DB_API}/customdrink`, {customDrink})
       .then(result => result.data);
+
+      //update user entry in DB with new customDrink
+      let updatedUser = await axios.post(`${DB_API}/user/${social_id}/drink`, {custom_drink: DBResult}).then(result => result.data); 
+
   
       //send text message to user with Coffeeshop's Twilio Number to text orders
       TwilioClient.messages
         .create({
           body: "Use this phone number to order your custom drink in advance!",
-          to: customerPhoneNumber,
+          to: phone_number,
           from: TWILIO_NUM,
           mediaUrl: 'http://www.example.com/cheeseburger.png',
         })

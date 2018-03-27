@@ -2,8 +2,6 @@ const axios = require('axios');
 const DB_API = process.env.DB_API;
 
 const updateUserProfile = async(req, res) => {
-  
-  console.log("req.user is ", req.user.social_id)
 
   const {social_id} = req.user;
   const {phone_number} = req.body;

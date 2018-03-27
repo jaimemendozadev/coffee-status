@@ -11,7 +11,7 @@ Router.post('/user', passport.authenticate('jwt', { session: false }), getUserPr
 
 Router.patch('/user', passport.authenticate('jwt', { session: false }), updateUserProfile);
 
-Router.post('/customdrink', createCustomDrink);
+Router.post('/customdrink', passport.authenticate('jwt', { session: false }), createCustomDrink);
 
 Router.post('/order', placeAnOrder);
 

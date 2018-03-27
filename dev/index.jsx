@@ -34,9 +34,9 @@ ReactDOM.render(
     <Switch>
       <PrivateRoute path='/homepage' component={HomePage} />
       <PrivateRoute path='/customdrink' component={CustomDrink} />
+      <PrivateRoute path='/updateprofile' component={UpdatePhone} />
       <Route path='/login' component={Login} />
       <Route path='/signup' component={SignUp} />
-      <Route path='/updateprofile' component={UpdatePhone} />
       <Route path='/errorpage' component={ErrorPage} />
       <Route path='/' component={LandingPage} />
     </Switch>

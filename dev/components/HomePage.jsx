@@ -13,17 +13,20 @@ class HomePage extends Component {
   }
 
   checkUserStatus(User){
-    if(User.fetchedUser == false){
+    const {fetchedUser, phone_number} = User;
+
+    if(fetchedUser == false){
       return <h1>Waiting to fetch User data...</h1>;      
     }
 
-    if (User.fetchedUser){
+    if (fetchedUser){
       return (
         <div>
           <Profile fetchedUser={User} />
           <Link to='/updateprofile'>Update Your Profile</Link>
           <br />
-          <Link to='/customdrink'>Click to Create your CustomDrink!</Link>
+          {phone_number == 'Not Registered' ? '' : <Link to='/customdrink'>Click to Create your CustomDrink!</Link>}
+          <h2>{phone_number == 'Not Registered' ? 'Please update your profile with you phone number!' : ''}</h2>
         </div>
       )
     }
@@ -41,6 +44,7 @@ class HomePage extends Component {
 
   render() {
     const {isAuthenticated, User} = this.props;
+    const {phone_number} = User;
     console.log("the User is ", User);
     return (
       <div>
